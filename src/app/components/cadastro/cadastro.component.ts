@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,7 +10,12 @@ export class CadastroComponent implements OnInit {
 
   constructor() { }
 
+  @ViewChild('frmLogin') frmLogin : FormControl;
+
   ngOnInit() {
   }
 
+  onSubmitForm() {
+    console.log(this.frmLogin);
+  }
 }

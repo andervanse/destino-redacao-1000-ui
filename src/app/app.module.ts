@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { ContatoComponent } from './components/contato/contato.component';
@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RedacoesAlunoComponent } from './components/redacoes-aluno/redacoes-aluno.component';
+import { FormsModule } from '@angular/forms';
 
 
 const appRouter = [
@@ -43,12 +44,16 @@ const appRouter = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    FormsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatCardModule,
+    MatInputModule,
     RouterModule.forRoot(appRouter, { useHash: true })
   ],
   providers: [],

@@ -1,13 +1,28 @@
-<div style="text-align: center;">
-    <h2>Login do usuário</h2>
+<br>
+<br>
+<div class="login">
+  <form #frmLogin="ngForm" (ngSubmit)="onSubmitForm()" novalidate>
+    <mat-card-header>
+      <mat-card-title><h3>Entrar</h3></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <br>
+      <mat-form-field>
+            <input matInput placeholder="E-mail" name="email" type="text" minlength="5" maxlength="30">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-card-footer class="right">
+        <button mat-raised-button type="submit">
+          Entrar
+        </button>
+      </mat-card-footer>
 
-    <br>
-    <br>
-    <h3>Adicionar campo e-mail</h3>    
-    <br>
-    <br>
-    <h3>Adicionar campo senha</h3>
-    <br>
-    <br>
-    <button mat-raised-button color="primary">Entrar</button>   
-</div>
+    </mat-card-content>
+  </form>
+</div>  
