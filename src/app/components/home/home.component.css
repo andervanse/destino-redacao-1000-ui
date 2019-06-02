@@ -1,1 +1,17 @@
 
+@media (max-width: 670px) {
+    img {
+        width: 80%;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.banner {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}

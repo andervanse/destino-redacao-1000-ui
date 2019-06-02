@@ -16,17 +16,18 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RedacoesAlunoComponent } from './components/redacoes-aluno/redacoes-aluno.component';
 import { FormsModule } from '@angular/forms';
+import { QuizComponent } from './components/quiz/quiz.component';
 
 
 const appRouter = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path:'home', component: HomeComponent },
   { path:'cadastro', component: CadastroComponent },
-  { path:'contato', component: ContatoComponent },
-  { path:'sobre', component: SobreComponent },
   { path:'entrar', component: LoginComponent },
-  { path:'redacoes-aluno', component: RedacoesAlunoComponent }
-
+  { path:'quiz', component: QuizComponent },  
+  { path:'redacoes-aluno', component: RedacoesAlunoComponent },
+  { path:'contato', component: ContatoComponent },
+  { path:'sobre', component: SobreComponent }
 ];
 
 @NgModule({
@@ -39,7 +40,8 @@ const appRouter = [
     LoginComponent,
     CadastroComponent,
     FooterComponent,
-    RedacoesAlunoComponent
+    RedacoesAlunoComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,

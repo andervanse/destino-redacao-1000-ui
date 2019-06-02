@@ -1,5 +1,13 @@
+
 .mat-form-field {
-    width: 96%;
+    width: 80%;
+}
+
+
+@media screen and (min-width:680px) {
+    .mat-form-field {
+        width: 20%;
+    }    
 }
 
 .mat-raised-button {
@@ -11,5 +19,6 @@
 }
 
 .login {
+    text-align: center;
     margin: 1em 1em 1em 1em;
 }

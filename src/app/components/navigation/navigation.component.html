@@ -9,8 +9,9 @@
       <a mat-list-item href="#" routerLink="cadastro"        (click)="drawer.toggle()">Cadastre-se</a>
       <a mat-list-item href="#" routerLink="entrar"          (click)="drawer.toggle()">Entrar</a>      
       <a mat-list-item href="#" routerLink="redacoes-aluno"  (click)="drawer.toggle()">Minhas Redações</a> 
-      <a mat-list-item href="#" routerLink="contato"         (click)="drawer.toggle()">Contato</a>
+      <a mat-list-item href="#" routerLink="quiz"            (click)="drawer.toggle()">Quiz</a>
       <hr>
+      <a mat-list-item href="#" routerLink="contato"         (click)="drawer.toggle()">Contato</a>
       <a mat-list-item href="#" routerLink="sobre"           (click)="drawer.toggle()">Sobre</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -25,11 +26,11 @@
         <a type="button" aria-label="Toggle sidenav" mat-button class="mat-button" (click)="drawer.toggle()">Menu</a>
       </div>
 
-      <div [class]="!(isHandset$ | async) ? 'container-right' : 'container-center'">
-        <span>Destino: redação 1000</span>
+      <div class="container-center">
+        <span *ngIf="!(isHandset$ | async)">Destino: redação 1000</span>
       </div>
       <div class="container-right" *ngIf="!(isHandset$ | async)">
-        <span></span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
     </div>
     </mat-toolbar>
 
