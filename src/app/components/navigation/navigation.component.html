@@ -20,15 +20,21 @@
       </button>
 
       <div *ngIf="!(isHandset$ | async)"> 
-        <a type="button" aria-label="Toggle sidenav" mat-button class="mat-button" (click)="drawer.toggle()">Menu</a>
+        
+        <a type="button" routerLink="home"><img width="64" height="auto" src="../../../assets/images/icons/icon-home-189x83.png" alt="home"/></a>
+        
       </div>
 
-      <div class="container-center">
-        <span *ngIf="!(isHandset$ | async)">Destino: redação 1000</span>
+      <div class="container-center">        
       </div>
-      <div class="container-right" *ngIf="!(isHandset$ | async)">
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+      <div class="container-center" *ngIf="!(isHandset$ | async)">
+        <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" routerLink="quiz">Quiz</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" routerLink="cadastro">Cadastre-se</a>
     </div>
+
     </mat-toolbar>
 
     <ng-content></ng-content>

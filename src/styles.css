@@ -6,22 +6,18 @@ html, body {
     margin: 0px;
 }
 
-
 p {
-   font: 300 20px/32px Roboto,"Helvetica Neue",sans-serif;
-   font-size: 18px;
+   font: 550 20px/32px Roboto,"Helvetica Neue",sans-serif;
+   font-size: 28px;
    margin: 2em 3em 2em 3em;
+   color: dimgrey;
 }
 
 h2, h3 {
-    margin: 1em 1em 1em 2em;
+    margin: 1em 1em 1em 1em;   
 }
 
 @media only screen and (max-width: 690px) {
-    h2, h3 {
-        margin: 1em 1em 1em 1em;
-    } 
-
     p {
         margin: 1em 1em 1em 1em;
      }        
@@ -29,8 +25,9 @@ h2, h3 {
 
 ul li {
     font: 300 20px/32px Roboto,"Helvetica Neue",sans-serif;
-    font-size: 18px;
+    font-size: 25px;
     margin: 0.5em 0.5em 0.5em 0em;
+    color: dimgrey;
 }
 
 .container {
@@ -42,4 +39,39 @@ ul li {
 
 .center {
     text-align: center;
+}
+
+/* Home banner */
+a {
+    text-decoration: none;
+}
+
+#banner {
+    background-color: cadetblue;  
+    font-family: Times, Sans-serif;
+    text-transform: uppercase;  
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+#banner h1 {
+    font-size: 42px;
+    font-family: Times, Sans-serif;
+    font-weight: 800;
+    margin: 1em, 1em, 1em, 1em;
+}
+
+img[mat-card-image] {
+  width: 250px;
+  height: auto;
+}
+
+@media (max-width: 690px) {
+    h1 {
+       font-size: 30px;
+    }
+
+    img[mat-card-image] {
+        width: 200px;
+    }    
 }

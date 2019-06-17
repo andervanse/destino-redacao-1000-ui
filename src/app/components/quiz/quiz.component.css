@@ -1,9 +1,6 @@
-img {
-    width: 80%;
-}
-
-@media (min-width: 670px) {
-    img {
-        width: 30%;
-    }
-}
+p {
+    font: 550 20px/32px Roboto,"Helvetica Neue",sans-serif;
+    font-size: 18px;
+    margin: 1em 1em 1em 1em;
+    color: dimgrey;
+ }

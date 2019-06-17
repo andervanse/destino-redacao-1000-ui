@@ -2,8 +2,7 @@
   height: 100%;
 }
 
-mat-sidenav-content {
-  background-image: url("../../../assets/images/logo-background.PNG");
+mat-sidenav-content {  
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -12,11 +11,6 @@ mat-sidenav-content {
   mat-sidenav-content {
     background-size: 80%;
   } 
-}
-
-.mat-drawer-container {
-  background-color: white;
- 
 }
 
 .sidenav {
@@ -29,13 +23,20 @@ mat-sidenav-content {
 }
 
 .mat-toolbar.mat-primary {
+  background: #52606c;
+  color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 76px;
+}
+
 .mat-button {
-  font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;  
+  font: 570 20px/32px Roboto,"Helvetica Neue",sans-serif;  
+  color: #ffffff;
 }
 
 .mat-button.home-btn {

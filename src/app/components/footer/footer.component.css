@@ -5,13 +5,12 @@
     clear: both;
     position: fixed;
     bottom: 0;
-    width: 100%;    
-}
+ }
 
 #footerMain #copyright {
     height: auto;
     width: 100%;
-    min-height: 40px;
+    min-height: 50px;
     display: inline-block;
     border-top: 1px solid #72777d;
     clear: both;    
@@ -19,8 +18,8 @@
 }
 
 #footerMain #copyright span {
-    line-height: 40px;
+    line-height: 50px;
     color: #ffffff;
     opacity: 0.4;
-    font-size: 14px;    
+    font-size: 16px;    
 }
