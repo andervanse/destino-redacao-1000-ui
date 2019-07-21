@@ -1,34 +1,55 @@
 <section class="center">
-    <mat-card id="banner">
-        <mat-card-content>
-          <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
-          <h2>Entrar</h2>
-        </mat-card-content>
-    </mat-card>
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h2>Entrar</h2>
+    </mat-card-content>
+  </mat-card>
 </section>
 <br>
 <div class="login">
-  <form #frmLogin="ngForm" (ngSubmit)="onSubmitForm()" novalidate>
+  <mat-card *ngIf="loginFailed">
     <mat-card-content>
-      <mat-form-field>
-            <input matInput placeholder="E-mail" name="email" type="text" minlength="5" maxlength="30">
-      </mat-form-field>
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30">
-      </mat-form-field>
-      <br>
-      <br>
+      <h2> {{ errorMessage }} </h2>
       <mat-card-footer>
-        <button mat-raised-button color="primary" type="submit">
-          Entrar
-        </button>
+          <div class="container">
+            <button mat-raised-button color="error" type="button" (click)="onNotificationClick(loginForm)">Fechar</button> 
+          </div>
       </mat-card-footer>
-
     </mat-card-content>
-  </form>
-</div>  
+    <br>
+  </mat-card>
+</div>
+
+<div class="login">
+  <mat-card>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off" autocorrect="off" novalidate>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput placeholder="E-mail" name="email" type="text" minlength="5" maxlength="30"
+            formControlName="email">
+          <mat-error *ngIf="loginForm.controls['email'].hasError('required')">Campo Obrigatório.</mat-error>
+          <mat-error *ngIf="loginForm.controls['email'].hasError('email')">E-mail inválido.</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30"
+            formControlName="senha">
+          <mat-error *ngIf="loginForm.controls['senha'].hasError('required')">Campo Obrigatório.</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-card-footer>
+          <button mat-raised-button color="primary" type="submit" #btnLogin>
+            Entrar
+          </button>
+        </mat-card-footer>
+
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>
 <br>
 <br>
 <br>

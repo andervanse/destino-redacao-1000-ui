@@ -14,9 +14,13 @@ import { ContatoComponent } from './components/contato/contato.component';
 import { LoginComponent } from './components/login/login.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { RedacoesAlunoComponent } from './components/redacoes-aluno/redacoes-aluno.component';
-import { FormsModule } from '@angular/forms';
+import { RedacoesAssinanteComponent } from './components/redacoes-assinante/redacoes-assinante.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizComponent } from './components/quiz/quiz.component';
+import { AuthService } from './services/auth.service';
+import { JwtInterceptor } from './services/interceptors/jwt-interceptor.service';
+import { ErrorInterceptor } from './services/interceptors/error-interceptor.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 const appRouter = [
@@ -25,7 +29,7 @@ const appRouter = [
   { path:'cadastro', component: CadastroComponent },
   { path:'entrar', component: LoginComponent },
   { path:'quiz', component: QuizComponent },  
-  { path:'redacoes-aluno', component: RedacoesAlunoComponent },
+  { path:'redacoes-aluno', component: RedacoesAssinanteComponent },
   { path:'contato', component: ContatoComponent },
   { path:'sobre', component: SobreComponent }
 ];
@@ -40,14 +44,16 @@ const appRouter = [
     LoginComponent,
     CadastroComponent,
     FooterComponent,
-    RedacoesAlunoComponent,
+    RedacoesAssinanteComponent,
     QuizComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -58,7 +64,10 @@ const appRouter = [
     MatInputModule,
     RouterModule.forRoot(appRouter, { useHash: true })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

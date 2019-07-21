@@ -1,40 +1,58 @@
 <section class="center">
-    <mat-card id="banner">
-        <mat-card-content>
-          <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
-          <h2>Cadastre-se</h2>
-        </mat-card-content>
-    </mat-card>
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h2>Cadastre-se</h2>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+<section class="center">
+  <mat-card *ngIf="errorMessage" (click)="onNotificationClick(frmCadastroUsuario)">
+    <mat-card-content>
+      <h2> {{ errorMessage }} </h2>
+    </mat-card-content>
+  </mat-card>
 </section>
 <div class="login">
-  <form #frmLogin="ngForm" (ngSubmit)="onSubmitForm()" novalidate>
+  <mat-card>
     <mat-card-content>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="E-mail" name="email" type="text" minlength="5" maxlength="30">
-      </mat-form-field>
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30">
-      </mat-form-field>
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="Repetir Senha" name="repetirSenha" type="password" minlength="5" maxlength="30">
-      </mat-form-field>
-      <br>
-      <br>
-      <mat-card-footer>
-        <button mat-raised-button color="primary" type="submit">
-          Entrar
-        </button>
-      </mat-card-footer>
-
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit(frmCadastroUsuario)" autocomplete="off" autocorrect="off">
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="E-mail"  minlength="5" maxlength="30" formControlName="email">
+          <mat-error *ngIf="cadastroForm.controls['email'].invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Nome" name="nome" type="text" minlength="5" maxlength="30" formControlName="nome">
+          <mat-error *ngIf="cadastroForm.controls['nome'].invalid">{{getNomeErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30" formControlName="senha">
+            <mat-error *ngIf="cadastroForm.controls['senha'].invalid">{{getSenhaErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Repetir Senha" type="password" minlength="5" maxlength="30" formControlName="confirmaSenha">
+          <mat-error *ngIf="cadastroForm.controls['confirmaSenha'].invalid">{{getConfirmaSenhaErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-card-footer>
+          <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!cadastroForm.valid">
+            Salvar
+          </button>
+        </mat-card-footer>
+      </form>
     </mat-card-content>
-  </form>
-</div>  
-<br>
-<br>
+    <br>
+    <br>    
+  </mat-card>  
+</div>
 <br>
 <br>
