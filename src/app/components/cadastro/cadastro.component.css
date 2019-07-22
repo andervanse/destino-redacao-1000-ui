@@ -5,16 +5,12 @@
 
 @media screen and (min-width:680px) {
     .mat-form-field {
-        width: 20%;
+        width: 30%;
     }    
 }
 
 .mat-raised-button {
     margin-right: 18px;
-}
-
-.right {
-    float: right;
 }
 
 .login {

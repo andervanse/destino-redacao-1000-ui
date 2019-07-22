@@ -21,12 +21,18 @@ import { AuthService } from './services/auth.service';
 import { JwtInterceptor } from './services/interceptors/jwt-interceptor.service';
 import { ErrorInterceptor } from './services/interceptors/error-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ConfirmaEmailComponent } from './components/cadastro/confirma-email/confirma-email.component';
+import { ResetarSenhaComponent } from './components/resetar-senha/resetar-senha.component';
+import { EmailEnviadoComponent } from './components/cadastro/email-enviado/email-enviado.component';
 
 
 const appRouter = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path:'home', component: HomeComponent },
   { path:'cadastro', component: CadastroComponent },
+  { path:'email-enviado', component: EmailEnviadoComponent },  
+  { path:'confirmar-email/:email/:codigo', component: ConfirmaEmailComponent },
+  { path:'reset-password/:email/:codigo', component: ResetarSenhaComponent },  
   { path:'entrar', component: LoginComponent },
   { path:'quiz', component: QuizComponent },  
   { path:'redacoes-aluno', component: RedacoesAssinanteComponent },
@@ -45,7 +51,10 @@ const appRouter = [
     CadastroComponent,
     FooterComponent,
     RedacoesAssinanteComponent,
-    QuizComponent
+    QuizComponent,
+    EmailEnviadoComponent,
+    ConfirmaEmailComponent,
+    ResetarSenhaComponent
   ],
   imports: [
     BrowserModule,

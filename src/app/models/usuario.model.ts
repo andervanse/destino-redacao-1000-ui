@@ -1,10 +1,11 @@
 
 export class Usuario {
     id: number;
-    nome: string;
+    nome?: string;
     email?: string;
     administrador?: boolean;
     login?: string;
     senha?: string;
     confirmaSenha?: string;
+    codigoResetSenha?: string;
 }

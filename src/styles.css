@@ -41,6 +41,14 @@ ul li {
     text-align: center;
 }
 
+.error-color {
+    color: #ff0000
+}
+
+.right {
+    float: right;
+}
+
 /* Home banner */
 a {
     text-decoration: none;

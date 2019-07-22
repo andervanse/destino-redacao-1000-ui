@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AssinanteService } from 'src/app/services/assinante.service';
 import { isNullOrUndefined } from 'util';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -15,14 +15,15 @@ export class CadastroComponent implements OnInit {
 
   cadastroForm :FormGroup;
   errorMessage :string;
+  isProcessing :boolean;
   @ViewChild('btnSalvarCadastro') btnSalvar: MatButton;
   
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private usuarioService: AssinanteService) { }
       
   ngOnInit() {
+    this.isProcessing = false;
     this.errorMessage = '';
 
     this.cadastroForm = new FormGroup({
@@ -35,15 +36,17 @@ export class CadastroComponent implements OnInit {
 
   onSubmit() {
     this.errorMessage = '';
-    console.log(this.cadastroForm);
+    this.btnSalvar._elementRef.nativeElement.innerText = 'Aguarde';
   
     if (this.cadastroForm.valid) {
-      this.btnSalvar._elementRef.nativeElement.classList.add('is-loading');
+      this.isProcessing = true;
 
       if ((!isNullOrUndefined(this.cadastroForm.value.senha) && !isNullOrUndefined(this.cadastroForm.value.confirmaSenha))
         && (this.cadastroForm.value.senha !== this.cadastroForm.value.confirmaSenha)) {
+        this.isProcessing = false;
         this.errorMessage = 'Senha e confirmação de senha diferentes!';
-        this.btnSalvar._elementRef.nativeElement.classList.remove('is-loading');
+        this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
+        return;
       }
       
       let usrSenha: Usuario = {
@@ -55,21 +58,17 @@ export class CadastroComponent implements OnInit {
         confirmaSenha: this.cadastroForm.value.confirmaSenha
       };
 
-      console.log(usrSenha);
-      this.usuarioService.salvar(usrSenha).subscribe((resp) => {
-        this.btnSalvar._elementRef.nativeElement.classList.remove('is-loading');
-        this.router.navigate(['home']);
+      this.usuarioService.salvar(usrSenha).subscribe((resp) => {        
+        this.isProcessing = false;
+        this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
+        this.router.navigate(['email-enviado']);        
       }, (error) => {
-        this.errorMessage = error.message;
+        this.isProcessing = false;
+        this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
 
-        for(var prop in error.error) {
-          console.log(prop);
+        for (var prop in error.error) {
           this.errorMessage += '\n' + error.error[prop][0];
-        }        
-
-        this.cadastroForm.value.senha = '';
-        this.cadastroForm.value.confirmaSenha = '';
-        this.btnSalvar._elementRef.nativeElement.classList.remove('is-loading');
+        }
       });
     }
   }

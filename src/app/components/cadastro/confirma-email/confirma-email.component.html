@@ -1,0 +1,27 @@
+<section class="center">
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h2>Cadastre-se</h2>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+<div>
+  <mat-card>
+    <mat-card-content>
+      <h3 class="center" *ngIf="email">
+        Clique no seu e-mail para confirmá-lo &nbsp;
+        <button mat-button mat-raised-link color="primary" [disabled]="isProcessing" (click)="onConfirmarEmail($event)">
+                {{ email }}
+        </button>
+      </h3>
+    </mat-card-content>
+  </mat-card>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

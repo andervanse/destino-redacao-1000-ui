@@ -10,7 +10,7 @@
 <section class="center">
   <mat-card *ngIf="errorMessage" (click)="onNotificationClick(frmCadastroUsuario)">
     <mat-card-content>
-      <h2> {{ errorMessage }} </h2>
+      <h2 class="error-color"> {{ errorMessage }} </h2>
     </mat-card-content>
   </mat-card>
 </section>
@@ -44,7 +44,7 @@
         <br>
         <br>
         <mat-card-footer>
-          <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!cadastroForm.valid">
+          <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!cadastroForm.valid || isProcessing">
             Salvar
           </button>
         </mat-card-footer>

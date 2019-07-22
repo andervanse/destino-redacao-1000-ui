@@ -31,8 +31,9 @@
       <div class="container-center" *ngIf="!(isHandset$ | async)">
         <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;
         <a type="button" mat-button class="mat-button" href="#" routerLink="quiz">Quiz</a>&nbsp;&nbsp;
-        <a type="button" mat-button class="mat-button" href="#" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
-        <a type="button" mat-button class="mat-button" href="#" routerLink="cadastro">Cadastre-se</a>
+        <a type="button" mat-button class="mat-button" href="#" *ngIf="!isAuthenticated()" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="logoff">Sair</a>&nbsp;&nbsp;        
+        <a type="button" mat-button class="mat-button" href="#" *ngIf="!isAuthenticated()" routerLink="cadastro">Cadastre-se</a>
     </div>
 
     </mat-toolbar>

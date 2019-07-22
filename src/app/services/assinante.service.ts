@@ -10,6 +10,9 @@ import { Usuario } from '../models/usuario.model';
 })
 export class AssinanteService {
 
+  private assinanteCadastrado :Usuario;
+  assi: Usuario;
+
   constructor(private http: HttpClient) { }
 
   obterAssinante(nome :string): Observable<Usuario[]> {
@@ -34,9 +37,41 @@ export class AssinanteService {
     return this.http.post<any>(`${environment.apiBaseUrl}/api/usuario`, assinante)
       .pipe(
         map((resp) => {
+          this.assinanteCadastrado = assinante;
           return resp;
         })
       );
-  }   
+  }
+
+  confirmarEmail(email :string, codigo :string): Observable<any> {
+    return this.http.post<any>(`${environment.apiBaseUrl}/api/auth/email/${email}`, { email: email, codigo: codigo })
+      .pipe(
+        map((resp) => {
+          return resp;
+        })
+      );
+  }  
+
+  resetarSenha(assinante: Usuario): Observable<any> {
+    return this.http.patch<any>(`${environment.apiBaseUrl}/api/usuario/senha`, { email: assinante.email })
+      .pipe(
+        map((resp) => {
+          return resp;
+        })
+      );
+  } 
+
+  definirNovaSenha(assinante: Usuario): Observable<any> {
+    return this.http.put<any>(`${environment.apiBaseUrl}/api/usuario/senha`, assinante)
+      .pipe(
+        map((resp) => {
+          return resp;
+        })
+      );
+  }  
+  
+  getAssinanteCadastrado(): Usuario {   
+    return this.assinanteCadastrado;
+  }
 
 }

@@ -1,0 +1,52 @@
+<section class="center">
+    <mat-card id="banner">
+      <mat-card-content>
+        <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+        <h2>Nova Senha</h2>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <br>
+  <section class="center">
+    <mat-card *ngIf="errorMessage" (click)="onNotificationClick(frmCadastroUsuario)">
+      <mat-card-content>
+        <h2 class="error-color"> {{ errorMessage }} </h2>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <div class="login">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit(frmCadastroUsuario)" autocomplete="off" autocorrect="off">
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="E-mail"  minlength="5" maxlength="30" disabled value="email">
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30" formControlName="senha">
+              <mat-error *ngIf="cadastroForm.controls['senha'].invalid">{{getSenhaErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Repetir Senha" type="password" minlength="5" maxlength="30" formControlName="confirmaSenha">
+            <mat-error *ngIf="cadastroForm.controls['confirmaSenha'].invalid">{{getConfirmaSenhaErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-card-footer>
+            <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!cadastroForm.valid || isProcessing">
+              Salvar
+            </button>
+          </mat-card-footer>
+        </form>
+      </mat-card-content>
+      <br>
+      <br>    
+    </mat-card>  
+  </div>
+  <br>
+  <br>
+  

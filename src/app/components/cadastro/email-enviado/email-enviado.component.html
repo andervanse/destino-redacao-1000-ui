@@ -1,0 +1,25 @@
+<section class="center">
+    <mat-card id="banner">
+      <mat-card-content>
+        <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+        <h2>Cadastre-se</h2>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <br>
+  <div>
+    <mat-card>
+      <mat-card-content>
+        <h3 class="center" *ngIf="assinanteCadastrado">
+          Foi enviado um e-mail para '{{ assinanteCadastrado.email }}' com o link de confirmação de seu cadastro.
+        </h3>
+        <h4 class="center">Esta guia já pode ser fechada.</h4>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
