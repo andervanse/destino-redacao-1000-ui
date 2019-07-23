@@ -1,0 +1,52 @@
+<section class="center">
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h2>Redefinição de Senha</h2>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+
+<section class="center">
+  <mat-card *ngIf="errorMessage" (click)="onNotificationClick()">
+    <mat-card-content>
+      <h2 class="error-color"> {{ errorMessage }} </h2>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<div class="center">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="envioEmailForm" (ngSubmit)="onSubmit()" autocomplete="off" autocorrect="off">
+        <br>
+        <h4 *ngIf="!success">Enviaremos um link para redefinir sua senha no e-mail informado abaixo.</h4>
+        <br>
+        <div *ngIf="success">E-mail enviado com sucesso.</div>
+        <mat-form-field *ngIf="!success">
+          <input matInput placeholder="E-mail" name="email" minlength="5" maxlength="30" formControlName="email">
+          <mat-error *ngIf="envioEmailForm.controls['email'].hasError('required')">Campo obrigatório.</mat-error>
+          <mat-error *ngIf="envioEmailForm.controls['email'].hasError('email')">Email inválido.</mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-card-footer>
+          <button *ngIf="!success" mat-raised-button color="primary" type="submit" #btnEnvioEmail
+            [disabled]="!envioEmailForm.valid || isProcessing">
+            Enviar
+          </button>
+        </mat-card-footer>
+        <br>
+        <br>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>

@@ -22,20 +22,23 @@ import { JwtInterceptor } from './services/interceptors/jwt-interceptor.service'
 import { ErrorInterceptor } from './services/interceptors/error-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ConfirmaEmailComponent } from './components/cadastro/confirma-email/confirma-email.component';
-import { ResetarSenhaComponent } from './components/resetar-senha/resetar-senha.component';
+import { RedefinirSenhaComponent } from './components/senha/redefinir-senha/redefinir-senha.component';
 import { EmailEnviadoComponent } from './components/cadastro/email-enviado/email-enviado.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { EmailRedefinirSenhaComponent } from './components/senha/email-redefinir-senha/email-redefinir-senha.component';
 
 
 const appRouter = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path:'', redirectTo: '/home', pathMatch: 'full' },
   { path:'home', component: HomeComponent },
   { path:'cadastro', component: CadastroComponent },
   { path:'email-enviado', component: EmailEnviadoComponent },  
+  { path:'email-redefinir-senha', component: EmailRedefinirSenhaComponent },
   { path:'confirmar-email/:email/:codigo', component: ConfirmaEmailComponent },
-  { path:'reset-password/:email/:codigo', component: ResetarSenhaComponent },  
+  { path:'reset-password/:email/:codigo', component: RedefinirSenhaComponent },  
   { path:'entrar', component: LoginComponent },
   { path:'quiz', component: QuizComponent },  
-  { path:'redacoes-aluno', component: RedacoesAssinanteComponent },
+  { path:'redacoes-assinante', component: RedacoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'contato', component: ContatoComponent },
   { path:'sobre', component: SobreComponent }
 ];
@@ -54,7 +57,8 @@ const appRouter = [
     QuizComponent,
     EmailEnviadoComponent,
     ConfirmaEmailComponent,
-    ResetarSenhaComponent
+    RedefinirSenhaComponent,
+    EmailRedefinirSenhaComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +80,7 @@ const appRouter = [
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AuthGuardService,
     AuthService],
   bootstrap: [AppComponent]
 })

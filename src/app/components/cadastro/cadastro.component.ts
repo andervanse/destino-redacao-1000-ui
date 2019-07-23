@@ -73,6 +73,10 @@ export class CadastroComponent implements OnInit {
     }
   }
 
+  onNotificationClick() {
+    this.errorMessage = '';
+  }
+
   getEmailErrorMessage() {
     return this.cadastroForm.controls['email'].hasError('required') ? 'Campo Obrigatório' :
         this.cadastroForm.controls['email'].hasError('email') ? 'E-Mail inválido' :

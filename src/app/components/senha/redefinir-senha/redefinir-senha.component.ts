@@ -8,10 +8,10 @@ import { AssinanteService } from 'src/app/services/assinante.service';
 
 @Component({
   selector: 'app-resetar-senha',
-  templateUrl: './resetar-senha.component.html',
-  styleUrls: ['./resetar-senha.component.css']
+  templateUrl: './redefinir-senha.component.html',
+  styleUrls: ['./redefinir-senha.component.css']
 })
-export class ResetarSenhaComponent implements OnInit {
+export class RedefinirSenhaComponent implements OnInit {
 
   resetSenhaForm :FormGroup;
   errorMessage :string;
@@ -37,8 +37,8 @@ export class ResetarSenhaComponent implements OnInit {
     this.errorMessage = '';
 
     this.resetSenhaForm = new FormGroup({
-      senha: new FormControl('', [Validators.required]),
-      confirmaSenha: new FormControl('', [Validators.required])
+      senha: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+      confirmaSenha: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)])
     });
   }
 
@@ -70,15 +70,14 @@ export class ResetarSenhaComponent implements OnInit {
         this.isProcessing = false;
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
         this.router.navigate(['entrar']);        
-      }, (error) => {
+      }, (errorResponse) => {
         this.isProcessing = false;
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
 
-        for (var prop in error.error) {
-          this.errorMessage += '\n' + error.error[prop][0];
+        for (var prop in errorResponse.error) {
+          this.errorMessage += '\n' + errorResponse.error[prop][0];
         }
       });
     }
-  }  
-
+  } 
 }

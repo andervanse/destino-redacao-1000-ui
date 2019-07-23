@@ -14,39 +14,40 @@
       </mat-card-content>
     </mat-card>
   </section>
-  <div class="login">
+  <div class="center">
     <mat-card>
       <mat-card-content>
-        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit(frmCadastroUsuario)" autocomplete="off" autocorrect="off">
+        <form [formGroup]="resetSenhaForm" (ngSubmit)="onSubmit()" autocomplete="off">
+          <br>
+          <label>E-mail</label>
+          <h3>{{ email }}</h3>
           <br>
           <mat-form-field>
-            <input matInput placeholder="E-mail"  minlength="5" maxlength="30" disabled value="email">
-          </mat-form-field>
-          <br>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30" formControlName="senha">
-              <mat-error *ngIf="cadastroForm.controls['senha'].invalid">{{getSenhaErrorMessage()}}</mat-error>
+            <input matInput placeholder="Nova Senha" type="password" minlength="5" maxlength="30" formControlName="senha">
+            <mat-error *ngIf="resetSenhaForm.controls['senha'].hasError('required')">Campo Obrigatório.</mat-error>
+            <mat-error *ngIf="resetSenhaForm.controls['senha'].hasError('minlength')">Campo Inválido.</mat-error>               
           </mat-form-field>
           <br>
           <br>
           <mat-form-field>
             <input matInput placeholder="Repetir Senha" type="password" minlength="5" maxlength="30" formControlName="confirmaSenha">
-            <mat-error *ngIf="cadastroForm.controls['confirmaSenha'].invalid">{{getConfirmaSenhaErrorMessage()}}</mat-error>
+            <mat-error *ngIf="resetSenhaForm.controls['confirmaSenha'].hasError('required')">Campo Obrigatório.</mat-error>
+            <mat-error *ngIf="resetSenhaForm.controls['confirmaSenha'].hasError('minlength')">Campo Inválido.</mat-error>
           </mat-form-field>
           <br>
           <br>
           <mat-card-footer>
-            <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!cadastroForm.valid || isProcessing">
+            <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!resetSenhaForm.valid || isProcessing">
               Salvar
             </button>
           </mat-card-footer>
         </form>
       </mat-card-content>
       <br>
-      <br>    
     </mat-card>  
   </div>
   <br>
   <br>
-  
+  <br>
+  <br>
+  <br>

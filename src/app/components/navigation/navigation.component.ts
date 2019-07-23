@@ -24,4 +24,13 @@ export class NavigationComponent {
   isAuthenticated() :boolean {
     return this.authService.isAuthenticated();
   }
+
+  logout(drawer) {
+    
+    if (drawer)
+      drawer.toggle();
+
+    this.authService.logout();
+  }  
+
 }

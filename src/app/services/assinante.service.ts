@@ -52,14 +52,14 @@ export class AssinanteService {
       );
   }  
 
-  resetarSenha(assinante: Usuario): Observable<any> {
-    return this.http.patch<any>(`${environment.apiBaseUrl}/api/usuario/senha`, { email: assinante.email })
+  redefinirSenha(email: string): Observable<any> {
+    return this.http.patch<any>(`${environment.apiBaseUrl}/api/usuario/senha`, { email: email })
       .pipe(
         map((resp) => {
           return resp;
         })
       );
-  } 
+  }   
 
   definirNovaSenha(assinante: Usuario): Observable<any> {
     return this.http.put<any>(`${environment.apiBaseUrl}/api/usuario/senha`, assinante)

@@ -4,12 +4,14 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'">
       
     <mat-nav-list>
-      <a mat-list-item href="#" routerLink="home"            (click)="drawer.toggle()">Home</a>
+      <a mat-list-item href="#" routerLink="home"               (click)="drawer.toggle()">Home</a>
       <hr>
-      <a mat-list-item href="#" routerLink="cadastro"        (click)="drawer.toggle()">Cadastre-se</a>
-      <a mat-list-item href="#" routerLink="entrar"          (click)="drawer.toggle()">Entrar</a>      
-      <a mat-list-item href="#" routerLink="redacoes-aluno"  (click)="drawer.toggle()">Minhas Redações</a> 
-      <a mat-list-item href="#" routerLink="quiz"            (click)="drawer.toggle()">Quiz</a>
+      <a mat-list-item href="#" routerLink="quiz"               (click)="drawer.toggle()">Quiz</a>
+      <a mat-list-item href="#" routerLink="cadastro"           *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Cadastre-se</a>
+      <a mat-list-item href="#" routerLink="entrar"             *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Entrar</a>
+      <a mat-list-item href="#" routerLink="redacoes-assinante" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Minhas Redações</a>       
+      <hr>
+      <a mat-list-item href="#"                                 (click)="logout(drawer)">Sair</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,28 +22,24 @@
       </button>
 
       <div *ngIf="!(isHandset$ | async)"> 
-        
         <a type="button" routerLink="home"><img width="64" height="auto" src="../../../assets/images/icons/icon-home-189x83.png" alt="home"/></a>
-        
       </div>
 
       <div class="container-center">        
       </div>
 
       <div class="container-center" *ngIf="!(isHandset$ | async)">
-        <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;        
         <a type="button" mat-button class="mat-button" href="#" routerLink="quiz">Quiz</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" *ngIf="!isAuthenticated()" routerLink="cadastro">Cadastre-se</a>&nbsp;&nbsp;
         <a type="button" mat-button class="mat-button" href="#" *ngIf="!isAuthenticated()" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
-        <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="logoff">Sair</a>&nbsp;&nbsp;        
-        <a type="button" mat-button class="mat-button" href="#" *ngIf="!isAuthenticated()" routerLink="cadastro">Cadastre-se</a>
-    </div>
-
+        <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()"  routerLink="redacoes-assinante">Redações</a>&nbsp;&nbsp;                
+        <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()"  (click)="logout()">Sair</a>               
+      </div>
     </mat-toolbar>
 
     <ng-content></ng-content>
     
   </mat-sidenav-content>
-
-  
 </mat-sidenav-container>
 

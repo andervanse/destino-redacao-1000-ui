@@ -45,22 +45,23 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);        
       },
       (error) => {
+        this.loginFailed = true;
         this.btnLogin._elementRef.nativeElement.classList.remove('is-loading');
+
         if (error.status == 400) {
           this.errorMessage = 'Usuário ou Senha inválidos';
-        }else {
+        } else {
           if (error.status == 0) {
             this.errorMessage = 'Serviço indisponível'
           } else {
             this.errorMessage = error.statusText;
           }
         }
-        this.loginFailed = true;
       });
     }
   }
 
-  onNotificationClick(form) {    
+  onNotificationClick() {    
     this.loginFailed = false;
   }
 

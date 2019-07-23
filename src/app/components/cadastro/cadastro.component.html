@@ -8,51 +8,64 @@
 </section>
 <br>
 <section class="center">
-  <mat-card *ngIf="errorMessage" (click)="onNotificationClick(frmCadastroUsuario)">
+  <mat-card *ngIf="errorMessage">
     <mat-card-content>
-      <h2 class="error-color"> {{ errorMessage }} </h2>
+      <h2 class="error-color">{{ errorMessage }}</h2>
+      <mat-card-footer>
+        <div class="container">
+          <button mat-raised-button color="error" type="button" (click)="onNotificationClick()">Fechar</button>
+        </div>
+      </mat-card-footer>
     </mat-card-content>
   </mat-card>
 </section>
-<div class="login">
+
+<div class="center">
   <mat-card>
     <mat-card-content>
-      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit(frmCadastroUsuario)" autocomplete="off" autocorrect="off">
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" autocomplete="off" autocorrect="off">
         <br>
         <mat-form-field>
-          <input matInput placeholder="E-mail"  minlength="5" maxlength="30" formControlName="email">
+          <input matInput placeholder="E-mail" minlength="5" maxlength="30" formControlName="email">
           <mat-error *ngIf="cadastroForm.controls['email'].invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>
         <br>
         <mat-form-field>
-          <input matInput placeholder="Nome" name="nome" type="text" minlength="5" maxlength="30" formControlName="nome">
+          <input matInput placeholder="Nome" name="nome" type="text" minlength="5" maxlength="30"
+            formControlName="nome">
           <mat-error *ngIf="cadastroForm.controls['nome'].invalid">{{getNomeErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>
         <br>
         <mat-form-field>
-          <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30" formControlName="senha">
-            <mat-error *ngIf="cadastroForm.controls['senha'].invalid">{{getSenhaErrorMessage()}}</mat-error>
+          <input matInput placeholder="Senha" name="senha" type="password" minlength="5" maxlength="30"
+            formControlName="senha">
+          <mat-error *ngIf="cadastroForm.controls['senha'].invalid">{{getSenhaErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>
         <br>
         <mat-form-field>
-          <input matInput placeholder="Repetir Senha" type="password" minlength="5" maxlength="30" formControlName="confirmaSenha">
-          <mat-error *ngIf="cadastroForm.controls['confirmaSenha'].invalid">{{getConfirmaSenhaErrorMessage()}}</mat-error>
+          <input matInput placeholder="Repetir Senha" type="password" minlength="5" maxlength="30"
+            formControlName="confirmaSenha">
+          <mat-error *ngIf="cadastroForm.controls['confirmaSenha'].invalid">{{getConfirmaSenhaErrorMessage()}}
+          </mat-error>
         </mat-form-field>
         <br>
         <br>
         <mat-card-footer>
-          <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro [disabled]="!cadastroForm.valid || isProcessing">
+          <button mat-raised-button color="primary" type="submit" #btnSalvarCadastro
+            [disabled]="!cadastroForm.valid || isProcessing">
             Salvar
           </button>
         </mat-card-footer>
       </form>
     </mat-card-content>
     <br>
-    <br>    
-  </mat-card>  
+  </mat-card>
 </div>
+<br>
+<br>
+<br>
 <br>
 <br>
