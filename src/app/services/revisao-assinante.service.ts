@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Revisao } from '../models/revisao.model';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RevisaoAssinanteService {
+
+  constructor(private http: HttpClient) { }
+
+  obterRevisoes(): Observable<Revisao[]> {
+
+    return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao`)
+    .pipe(
+        map((resp) => {
+            return resp;
+        })
+    ); 
+
+  }
+
+  uploadArquivoRevisao(file:any) {
+    return this.http.post<any>(`${environment.apiBaseUrl}/api/revisao`, file)
+      .pipe(
+        map((resp) => {
+          return resp;
+        })
+      );
+  }
+}

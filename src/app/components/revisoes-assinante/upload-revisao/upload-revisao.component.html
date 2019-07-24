@@ -1,0 +1,45 @@
+<section class="center">
+    <mat-card id="banner">
+      <mat-card-content>
+        <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+        <h2>Minhas Revisões</h2>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <br>
+  <div class="center">
+    <mat-card>
+      <mat-card-content>
+        <br>
+        <br>
+        <h3>Clique no botão abaixo para fazer o upload do seu arquivo</h3>
+        <br>
+        <form [formGroup]="revisaoForm" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" novalidate (ngSubmit)="onSubmit()">
+          <div class="upload-btn-wrapper">
+            <button class="btn" mat-raised-button type="button">Upload do arquivo</button>
+            <input type="file" (change)="onFileChange($event)" />
+            <input type="hidden" formControlName="arquivo" />
+          </div>
+          <br>
+          <br>
+          <br>
+          <h3>Deixe um breve comentário sobre o seu texto</h3>
+          <br>
+          <mat-form-field>
+            <textarea matInput placeholder="Comentário" name="comentario" type="text" minlength="5" maxlength="160"
+              formControlName="comentario"></textarea>
+            <mat-error *ngIf="revisaoForm.controls['comentario'].hasError('required')">Campo Obrigatório.</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+          <button mat-raised-button type="submit" [disabled]="revisaoForm.invalid || revisaoForm.prestine || isProcessing" #btnSalvar>Salvar</button>
+        </form>
+  
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>

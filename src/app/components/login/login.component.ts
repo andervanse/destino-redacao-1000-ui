@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginCredentials } from 'src/app/models/login-credentials.model';
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm :FormGroup;
   loginFailed :boolean = false;
   errorMessage :string;
+  isProcessing :boolean = false;
   @ViewChild('btnLogin') btnLogin : MatButton;
   
   constructor(
@@ -24,29 +25,31 @@ export class LoginComponent implements OnInit {
       this.errorMessage = '';
 
       this.loginForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        senha: new FormControl('', [Validators.required])
+        email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
+        senha: new FormControl('', [Validators.required, Validators.minLength(5)])
       });      
   }
 
   onSubmit(form) {
     this.errorMessage = '';
+    this.isProcessing = true;
+    this.btnLogin._elementRef.nativeElement.innerText = 'Aguarde';
 
     if (form.valid) {
       var credentials = new LoginCredentials();
       credentials.login = form.value.email;
       credentials.senha = form.value.senha;
       
-      this.btnLogin._elementRef.nativeElement.classList.add('is-loading'); 
-
       this.authService.autenticar(credentials).subscribe((resp) => {
         this.loginFailed = false;
-        this.btnLogin._elementRef.nativeElement.classList.remove('is-loading');
-        this.router.navigate(['home']);        
+        this.isProcessing = false;
+        this.btnLogin._elementRef.nativeElement.innerText = 'Entrar';
+        this.router.navigate(['home']);           
       },
       (error) => {
         this.loginFailed = true;
-        this.btnLogin._elementRef.nativeElement.classList.remove('is-loading');
+        this.isProcessing = false;
+        this.btnLogin._elementRef.nativeElement.innerText = 'Entrar';
 
         if (error.status == 400) {
           this.errorMessage = 'Usuário ou Senha inválidos';
