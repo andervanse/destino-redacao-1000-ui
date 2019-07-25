@@ -15,17 +15,18 @@
         <div class="container">
           <button mat-raised-button color="error" type="button" (click)="onNotificationClick()">Fechar</button>
         </div>
+        <br>
       </mat-card-footer>
     </mat-card-content>
   </mat-card>
 </section>
-
+<br>
 <div class="center">
   <mat-card>
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" autocorrect="off" novalidate>
         <mat-form-field>
-          <input matInput placeholder="E-mail" name="email" type="text" minlength="5" maxlength="30"
+          <input matInput placeholder="E-mail" name="email" type="text" minlength="5" maxlength="60"
             formControlName="email">
           <mat-error *ngIf="loginForm.controls['email'].hasError('required')">Campo Obrigatório.</mat-error>
           <mat-error *ngIf="loginForm.controls['email'].hasError('email')">E-mail inválido.</mat-error>

@@ -49,14 +49,13 @@ export class CadastroComponent implements OnInit {
         return;
       }
       
-      let usrSenha: Usuario = {
-        id: null,
-        login: this.cadastroForm.value.email,
-        nome: this.cadastroForm.value.nome,
-        email: this.cadastroForm.value.email,
-        senha: this.cadastroForm.value.senha,
-        confirmaSenha: this.cadastroForm.value.confirmaSenha
-      };
+      let usrSenha = new Usuario();
+      usrSenha.id = null;
+      usrSenha.login = this.cadastroForm.value.email,
+      usrSenha.nome = this.cadastroForm.value.nome,
+      usrSenha.email = this.cadastroForm.value.email,
+      usrSenha.senha = this.cadastroForm.value.senha,
+      usrSenha.confirmaSenha = this.cadastroForm.value.confirmaSenha;
 
       this.usuarioService.salvar(usrSenha).subscribe((resp) => {        
         this.isProcessing = false;

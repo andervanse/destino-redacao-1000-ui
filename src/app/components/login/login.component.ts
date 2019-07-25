@@ -46,19 +46,19 @@ export class LoginComponent implements OnInit {
         this.btnLogin._elementRef.nativeElement.innerText = 'Entrar';
         this.router.navigate(['home']);           
       },
-      (error) => {
+      (errorResponse) => {
         this.loginFailed = true;
         this.isProcessing = false;
         this.btnLogin._elementRef.nativeElement.innerText = 'Entrar';
 
-        if (error.status == 400) {
+        if (errorResponse.status == 500) {
+          this.errorMessage = 'Falha ao cadastrar Usuário';
+        } else if (errorResponse.status == 400) {
           this.errorMessage = 'Usuário ou Senha inválidos';
-        } else {
-          if (error.status == 0) {
+        } else if (errorResponse.status == 0) {
             this.errorMessage = 'Serviço indisponível'
-          } else {
-            this.errorMessage = error.statusText;
-          }
+        } else {
+            this.errorMessage = errorResponse.statusText;
         }
       });
     }

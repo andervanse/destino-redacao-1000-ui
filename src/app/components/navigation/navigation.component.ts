@@ -25,6 +25,10 @@ export class NavigationComponent {
     return this.authService.isAuthenticated();
   }
 
+  isAdmin() :boolean {
+    return this.authService.isAdmin();
+  }
+
   logout(drawer) {
     
     if (drawer)

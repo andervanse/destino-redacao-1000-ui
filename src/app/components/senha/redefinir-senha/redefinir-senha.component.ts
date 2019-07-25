@@ -57,14 +57,13 @@ export class RedefinirSenhaComponent implements OnInit {
         return;
       }
       
-      let usrSenha: Usuario = {
-        id: null,
-        login: this.email,
-        email: this.email,
-        senha: this.resetSenhaForm.value.senha,
-        confirmaSenha: this.resetSenhaForm.value.confirmaSenha,
-        codigoResetSenha: this.codigo
-      };
+      let usrSenha = new Usuario();
+      usrSenha.id = null;
+      usrSenha.login = this.email;
+      usrSenha.email = this.email;
+      usrSenha.senha = this.resetSenhaForm.value.senha;
+      usrSenha.confirmaSenha = this.resetSenhaForm.value.confirmaSenha;
+      usrSenha.codigoResetSenha = this.codigo;
 
       this.usuarioService.definirNovaSenha(usrSenha).subscribe((resp) => {        
         this.isProcessing = false;

@@ -1,0 +1,46 @@
+<section class="center">
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h2>Minhas Revisões</h2>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+<div class="center">
+  <mat-card>
+    <mat-card-content>
+      <a mat-raised-button color="primary" routerLink="upload">Novo Upload</a>
+      <br>
+      <br>
+      <h3 *ngIf="errorMessage" class="error-color">{{errorMessage}}</h3>
+      <div *ngIf="isProcessing">
+        <h3>Carregando...</h3>
+      </div>
+      <div *ngIf="revisoes" class="container">
+        <mat-list>
+          <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
+            <h4 mat-line>
+              <a mat-button [href]="revisao.arquivo.url" target="_blank">
+                {{revisao.arquivo.nome}}
+              </a>
+            </h4>
+            <p mat-line>
+               <button mat-stroked-button color="primary" (click)="confirmaCheckOut($event)">
+                 Check-out
+               </button>
+            </p> 
+            <p mat-line>postado: {{revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy'}} &nbsp; - &nbsp;
+                        status: {{revisao.statusRevisao}}</p>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>

@@ -20,15 +20,34 @@ export class RevisaoAssinanteService {
             return resp;
         })
     ); 
-
   }
+
+  obterRevisoesPendentes(): Observable<Revisao[]> {
+
+    return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao/pendentes`)
+    .pipe(
+        map((resp) => {
+           return resp;
+        })
+    ); 
+  } 
+  
+  obterRevisoesNovas(): Observable<Revisao[]> {
+
+    return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao/novas`)
+    .pipe(
+        map((resp) => {
+           return resp;
+        })
+    ); 
+  }   
 
   uploadArquivoRevisao(file:any) {
     return this.http.post<any>(`${environment.apiBaseUrl}/api/revisao`, file)
       .pipe(
-        map((resp) => {
-          return resp;
-        })
+          map((resp) => {
+             return resp;
+          })
       );
   }
 }

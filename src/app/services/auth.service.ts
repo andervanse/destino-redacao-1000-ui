@@ -17,12 +17,16 @@ export class AuthService {
     onAuthenticating: EventEmitter<boolean> = new EventEmitter();
 
     obterUsuario(): Usuario {
-        let usuario = JSON.parse(localStorage.getItem('currentUser'));
+        let usuarioObj = JSON.parse(localStorage.getItem('currentUser'));
 
-        if (isNullOrUndefined(usuario)) {
+        if (isNullOrUndefined(usuarioObj)) {
             return null;
         } else {
-            return usuario['usuario'];
+            let usuario = new Usuario();
+            usuario.nome =  usuarioObj['usuario'].nome;
+            usuario.email = usuarioObj['usuario'].email;
+            usuario.tipoUsuario = usuarioObj['usuario'].tipoUsuario;
+            return usuario;
         }
     }
 
@@ -65,7 +69,7 @@ export class AuthService {
 
     public isAdmin(): boolean {
         let user = this.obterUsuario();
-        return this.isAuthenticated() && user.administrador;
+        return this.isAuthenticated() && user.revisor();
     }
 
     public logout() {

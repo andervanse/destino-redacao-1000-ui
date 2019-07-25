@@ -2,7 +2,7 @@
     <mat-card id="banner">
       <mat-card-content>
         <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
-        <h2>Minhas Revisões</h2>
+        <h2>Minhas Redacoes</h2>
       </mat-card-content>
     </mat-card>
   </section>
@@ -12,13 +12,18 @@
       <mat-card-content>
         <br>
         <br>
+        <h3 *ngIf="errorMessage" class="error-color">{{errorMessage}}</h3>
         <h3>Clique no botão abaixo para fazer o upload do seu arquivo</h3>
         <br>
         <form [formGroup]="revisaoForm" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" novalidate (ngSubmit)="onSubmit()">
           <div class="upload-btn-wrapper">
             <button class="btn" mat-raised-button type="button">Upload do arquivo</button>
             <input type="file" (change)="onFileChange($event)" />
-            <input type="hidden" formControlName="arquivo" />
+            <br>
+            <br>
+            <mat-form-field>
+               <input matInput type="text" formControlName="arquivo" readonly/>
+            </mat-form-field>
           </div>
           <br>
           <br>

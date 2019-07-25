@@ -13,15 +13,18 @@
       <a mat-raised-button color="primary" routerLink="upload">Novo Upload</a>
       <br>
       <br>
+      <h3 *ngIf="errorMessage" class="error-color">{{ errorMessage }}</h3>
+      <div *ngIf="isProcessing">
+        <h3>Carregando...</h3>
+      </div>
       <div *ngIf="revisoes" class="container">
         <mat-list>
           <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
-            <br>
             <mat-icon mat-list-icon>note</mat-icon>            
             <h4 mat-line>
               <a mat-button [href]="revisao.arquivo.url" target="_blank">
                 {{revisao.arquivo.nome}}
-              </a>
+              </a>            
             </h4>
             <p mat-line> 
               postado: {{revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy'}} &nbsp; - &nbsp;

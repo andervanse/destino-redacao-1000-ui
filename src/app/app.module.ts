@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatDialogModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { ContatoComponent } from './components/contato/contato.component';
@@ -25,8 +25,9 @@ import { EmailEnviadoComponent } from './components/cadastro/email-enviado/email
 import { AuthGuardService } from './services/auth-guard.service';
 import { EmailRedefinirSenhaComponent } from './components/senha/email-redefinir-senha/email-redefinir-senha.component';
 import { RevisaoAssinanteService } from './services/revisao-assinante.service';
-import { RevisoesAssinanteComponent } from './components/revisoes-assinante/revisoes-assinante.component';
-import { UploadRevisaoComponent } from './components/revisoes-assinante/upload-revisao/upload-revisao.component';
+import { RevisoesAssinanteComponent } from './components/revisoes/assinante/revisoes-assinante.component';
+import { UploadRevisaoComponent } from './components/revisoes/upload-revisao/upload-revisao.component';
+import { RevisoesRevisorComponent, DialogConfirmComponent } from './components/revisoes/revisor/revisoes-revisor.component';
 
 
 const appRouter = [
@@ -41,6 +42,7 @@ const appRouter = [
   { path:'quiz', component: QuizComponent },  
   { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'revisoes-assinante/upload', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
+  { path:'revisoes-revisor', component: RevisoesRevisorComponent, canActivate: [AuthGuardService] },  
   { path:'contato', component: ContatoComponent },
   { path:'sobre', component: SobreComponent }
 ];
@@ -61,7 +63,9 @@ const appRouter = [
     ConfirmaEmailComponent,
     RedefinirSenhaComponent,
     EmailRedefinirSenhaComponent,
-    UploadRevisaoComponent
+    UploadRevisaoComponent,
+    RevisoesRevisorComponent,
+    DialogConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -78,11 +82,16 @@ const appRouter = [
     MatListModule,
     MatCardModule,
     MatInputModule,
+    MatDialogModule,    
     RouterModule.forRoot(appRouter, { useHash: true })
+  ],
+  entryComponents: [
+    DialogConfirmComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false} },
     AuthGuardService,
     AuthService,
     RevisaoAssinanteService],
