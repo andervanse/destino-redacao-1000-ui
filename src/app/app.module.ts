@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatDialogModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HomeComponent } from './components/home/home.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { ContatoComponent } from './components/contato/contato.component';
@@ -19,15 +20,19 @@ import { AuthService } from './services/auth.service';
 import { JwtInterceptor } from './services/interceptors/jwt-interceptor.service';
 import { ErrorInterceptor } from './services/interceptors/error-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthGuardService } from './services/auth-guard.service';
+
 import { ConfirmaEmailComponent } from './components/cadastro/confirma-email/confirma-email.component';
 import { RedefinirSenhaComponent } from './components/senha/redefinir-senha/redefinir-senha.component';
 import { EmailEnviadoComponent } from './components/cadastro/email-enviado/email-enviado.component';
-import { AuthGuardService } from './services/auth-guard.service';
 import { EmailRedefinirSenhaComponent } from './components/senha/email-redefinir-senha/email-redefinir-senha.component';
 import { RevisaoAssinanteService } from './services/revisao-assinante.service';
 import { RevisoesAssinanteComponent } from './components/revisoes/assinante/revisoes-assinante.component';
 import { UploadRevisaoComponent } from './components/revisoes/upload-revisao/upload-revisao.component';
-import { RevisoesRevisorComponent, DialogConfirmComponent } from './components/revisoes/revisor/revisoes-revisor.component';
+import { RevisoesNovasComponent } from './components/revisoes/revisor/novas/revisoes-novas.component';
+import { RevisoesPendentesComponent } from './components/revisoes/revisor/pendentes/revisoes-pendentes.component';
+import { DialogConfirmComponent } from './components/revisoes/revisor/confirmation-dialog.component';
+import { PainelRevisorComponent } from './components/revisoes/revisor/painel-revisor/painel-revisor.component';
 
 
 const appRouter = [
@@ -42,7 +47,9 @@ const appRouter = [
   { path:'quiz', component: QuizComponent },  
   { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'revisoes-assinante/upload', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
-  { path:'revisoes-revisor', component: RevisoesRevisorComponent, canActivate: [AuthGuardService] },  
+  { path:'revisoes-novas', component: RevisoesNovasComponent, canActivate: [AuthGuardService] },
+  { path:'revisoes-pendentes', component: RevisoesPendentesComponent, canActivate: [AuthGuardService] },
+  { path:'painel-revisor', component: PainelRevisorComponent, canActivate: [AuthGuardService] },
   { path:'contato', component: ContatoComponent },
   { path:'sobre', component: SobreComponent }
 ];
@@ -64,8 +71,10 @@ const appRouter = [
     RedefinirSenhaComponent,
     EmailRedefinirSenhaComponent,
     UploadRevisaoComponent,
-    RevisoesRevisorComponent,
-    DialogConfirmComponent
+    RevisoesNovasComponent,
+    DialogConfirmComponent,
+    RevisoesPendentesComponent,
+    PainelRevisorComponent
   ],
   imports: [
     BrowserModule,

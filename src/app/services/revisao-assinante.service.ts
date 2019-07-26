@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Revisao } from '../models/revisao.model';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { AtualizaRevisao } from '../models/atualiza-revisao.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,15 @@ export class RevisaoAssinanteService {
 
   uploadArquivoRevisao(file:any) {
     return this.http.post<any>(`${environment.apiBaseUrl}/api/revisao`, file)
+      .pipe(
+          map((resp) => {
+             return resp;
+          })
+      );
+  }
+
+  atualizarRevisor(atualizaRevisao :AtualizaRevisao) {
+    return this.http.patch<any>(`${environment.apiBaseUrl}/api/revisao`, atualizaRevisao)
       .pipe(
           map((resp) => {
              return resp;

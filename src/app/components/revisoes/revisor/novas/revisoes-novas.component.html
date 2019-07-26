@@ -2,7 +2,7 @@
   <mat-card id="banner">
     <mat-card-content>
       <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
-      <h2>Minhas Revisões</h2>
+      <h2>Revisões Novas</h2>
     </mat-card-content>
   </mat-card>
 </section>
@@ -10,9 +10,6 @@
 <div class="center">
   <mat-card>
     <mat-card-content>
-      <a mat-raised-button color="primary" routerLink="upload">Novo Upload</a>
-      <br>
-      <br>
       <h3 *ngIf="errorMessage" class="error-color">{{errorMessage}}</h3>
       <div *ngIf="isProcessing">
         <h3>Carregando...</h3>
@@ -26,7 +23,7 @@
               </a>
             </h4>
             <p mat-line>
-               <button mat-stroked-button color="primary" (click)="confirmaCheckOut($event)">
+               <button mat-stroked-button color="primary" (click)="confirmaCheckOut(revisao)">
                  Check-out
                </button>
             </p> 
@@ -38,6 +35,9 @@
       </div>
     </mat-card-content>
   </mat-card>
+  <br>
+  <br>  
+  <a mat-raised-button color="primary" routerLink="../painel-revisor">Voltar</a>
 </div>
 <br>
 <br>

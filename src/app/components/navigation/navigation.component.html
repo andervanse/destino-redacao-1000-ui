@@ -31,14 +31,14 @@
       <div class="container-center" *ngIf="!(isHandset$ | async)">
         <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;
         <a type="button" mat-button class="mat-button" href="#" routerLink="quiz">Quiz</a>&nbsp;&nbsp;
-        <div *ngIf="!isAuthenticated()">
-           <a type="button" mat-button class="mat-button" href="#" routerLink="cadastro">Cadastre-se</a>&nbsp;&nbsp;
-           <a type="button" mat-button class="mat-button" href="#" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
-        </div>
+        
+        <a *ngIf="!isAuthenticated()" type="button" mat-button class="mat-button" href="#" routerLink="cadastro">Cadastre-se</a>&nbsp;&nbsp;
+        <a *ngIf="!isAuthenticated()" type="button" mat-button class="mat-button" href="#" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
+        
         
         <div *ngIf="isAdmin(); then revisoes else redacoes"></div>
         <ng-template #revisoes>
-           <a type="button" mat-button class="mat-button" href="#" routerLink="revisoes-revisor">Revisões</a>&nbsp;&nbsp;
+           <a type="button" mat-button class="mat-button" href="#" routerLink="painel-revisor">Revisões</a>&nbsp;&nbsp;
         </ng-template>
         <ng-template #redacoes>
            <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="revisoes-assinante">Redações</a>&nbsp;&nbsp;
