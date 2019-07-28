@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AssinanteService } from 'src/app/services/assinante.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-email-enviado',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailEnviadoComponent implements OnInit {
 
-  constructor() { }
+  assinanteCadastrado :Usuario;
+  
+  constructor(
+    private assinanteSrv :AssinanteService
+  ) { }
 
   ngOnInit() {
+    this.assinanteCadastrado = this.assinanteSrv.getAssinanteCadastrado();
   }
 
 }

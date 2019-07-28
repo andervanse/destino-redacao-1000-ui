@@ -6,7 +6,7 @@
     <mat-nav-list>
       <a mat-list-item href="#" routerLink="home"               (click)="drawer.toggle()">Home</a>
       <hr>
-      <a mat-list-item href="#" routerLink="quiz"               (click)="drawer.toggle()">Quiz</a>
+      <a mat-list-item href="#" routerLink="redacoes"               (click)="drawer.toggle()">Redações</a>
       <a mat-list-item href="#" routerLink="cadastro"           *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Cadastre-se</a>
       <a mat-list-item href="#" routerLink="entrar"             *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Entrar</a>
       <a mat-list-item href="#" routerLink="revisoes-assinante" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Minhas Redações</a>       
@@ -30,18 +30,17 @@
 
       <div class="container-center" *ngIf="!(isHandset$ | async)">
         <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;
-        <a type="button" mat-button class="mat-button" href="#" routerLink="quiz">Quiz</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" routerLink="redacoes">Redações</a>&nbsp;&nbsp;
         
         <a *ngIf="!isAuthenticated()" type="button" mat-button class="mat-button" href="#" routerLink="cadastro">Cadastre-se</a>&nbsp;&nbsp;
         <a *ngIf="!isAuthenticated()" type="button" mat-button class="mat-button" href="#" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
-        
-        
+                
         <div *ngIf="isAdmin(); then revisoes else redacoes"></div>
         <ng-template #revisoes>
            <a type="button" mat-button class="mat-button" href="#" routerLink="painel-revisor">Revisões</a>&nbsp;&nbsp;
         </ng-template>
         <ng-template #redacoes>
-           <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="revisoes-assinante">Redações</a>&nbsp;&nbsp;
+           <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="revisoes-assinante">Minhas redações</a>&nbsp;&nbsp;
         </ng-template>
         
         <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" (click)="logout()">Sair</a>
