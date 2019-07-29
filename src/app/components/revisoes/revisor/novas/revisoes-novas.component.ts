@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AtualizaRevisao } from 'src/app/models/atualiza-revisao.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogConfirmComponent } from '../confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-revisoes-novas',
@@ -18,6 +19,7 @@ export class RevisoesNovasComponent implements OnInit {
   errorMessage: string = null;
 
   constructor (
+    public router: Router,
     public dialog: MatDialog,
     private authSvc: AuthService,
     private revisaoSvc: RevisaoAssinanteService
@@ -42,7 +44,7 @@ export class RevisoesNovasComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       width: '70%',
-      data: { title :'Atenção', content :'Deseja fazer o check-in desta Redação?' }
+      data: { title :'Atenção', content :'Deseja colocar este item na sua lista de correções?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -56,7 +58,9 @@ export class RevisoesNovasComponent implements OnInit {
         atualizaRevisao.revisorId   = revisor.id;
         
         this.revisaoSvc.atualizarRevisor(atualizaRevisao).subscribe(
-          (resp) => { console.log(resp); },
+          (resp) => {
+            this.router.navigate(['../painel-revisor']);
+          },
           (errorResponse) => { console.error(errorResponse.error); }
         );
       }

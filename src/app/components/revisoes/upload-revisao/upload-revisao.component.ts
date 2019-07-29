@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RevisaoAssinanteService } from 'src/app/services/revisao-assinante.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatButton } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Revisao } from 'src/app/models/revisao.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-upload-revisao',
@@ -15,74 +16,104 @@ export class UploadRevisaoComponent implements OnInit {
   revisaoForm: FormGroup;
   uploadedFile: File;
   revisoes: Revisao[];
+  revisaoIdRef: number;
   errorMessage: string = null;
   isProcessing: boolean = false;
-  @ViewChild('btnSalvar') btnLogin : MatButton;
+  @ViewChild('btnSalvar') btnLogin: MatButton;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
+    private authSvc: AuthService,
     private revisaoSvc: RevisaoAssinanteService
   ) { }
 
   ngOnInit() {
-    this.revisaoForm = new FormGroup ({
+    this.revisaoForm = new FormGroup({
       arquivo: new FormControl(),
       comentario: new FormControl('', [])
     });
 
-    this.revisaoSvc.obterRevisoes().subscribe((resp) => {
-      this.isProcessing = false;
-      this.revisoes = resp;
-    }, (errorResponse) => {
-      this.isProcessing = false;
-      this.errorMessage = 'Falha ao carregar revisões.';
-      console.error(errorResponse);
-    });    
+    this.route.params.subscribe((params) => {
+      this.revisaoIdRef = +params['revisaoId'];
+    });
+
+    let usr = this.authSvc.obterUsuario();
+
+    if (usr.tipoUsuario == 'Assinante') {
+      this.revisaoSvc.obterRevisoes().subscribe((resp) => {
+        this.isProcessing = false;
+        this.revisoes = resp;
+      }, (errorResponse) => {
+        this.isProcessing = false;
+        this.errorMessage = 'Falha ao carregar revisões.';
+        console.error(errorResponse);
+      });
+    }
   }
 
   onSubmit() {
-    
+
     if (this.revisaoForm.valid) {
       this.isProcessing = true;
       this.btnLogin._elementRef.nativeElement.innerText = 'Aguarde';
       const formData = new FormData();
-      var revisaoId = this.revisoes.find(r => r.arquivo.nome == this.revisaoForm.get('arquivo').value).id;
-      formData.append('revisaoId', (revisaoId ? revisaoId.toString() : ''));
+
+      if (this.revisoes) {
+        let revisao = this.revisoes.find(r => r.arquivo.nome == this.revisaoForm.get('arquivo').value);
+
+        if (revisao) {
+          formData.append('revisaoId', revisao.id.toString());
+        }
+
+      } else {
+        formData.append('revisaoId', '0');
+      }
+
+      if (this.revisaoIdRef) {
+        let revisao = this.revisaoSvc.obterRevisaoUploadCorrecao();
+        formData.append('assinanteId', revisao.assinanteId.toString());  
+        formData.append('revisaoIdRef', revisao.id.toString());
+        formData.append('tipoArquivo', 'correcao');
+      } else {
+        formData.append('tipoArquivo', 'revisao');
+      }
+
       formData.append('arquivo', this.uploadedFile);
       formData.append('comentario', this.revisaoForm.get('comentario').value);
-  
+
       this.revisaoSvc.uploadArquivoRevisao(formData)
-          .subscribe((resp) => {
-            this.errorMessage = null;
-             console.log(resp);
-             this.isProcessing = false;
-             this.btnLogin._elementRef.nativeElement.innerText = 'Salvar';
-             this.router.navigate(['./revisoes-assinante']);
-          }, (errorResponse) => {
-              this.errorMessage = 'Erro ao processar arquivo';
-              console.error(errorResponse);
-              this.isProcessing = false;
-              this.btnLogin._elementRef.nativeElement.innerText = 'Salvar';
-          });
+        .subscribe((resp) => {
+          this.errorMessage = null;
+          console.log(resp);
+          this.isProcessing = false;
+          this.btnLogin._elementRef.nativeElement.innerText = 'Salvar';
+          this.router.navigate(['./revisoes-assinante']);
+        }, (errorResponse) => {
+          this.errorMessage = 'Erro ao processar arquivo';
+          console.error(errorResponse);
+          this.isProcessing = false;
+          this.btnLogin._elementRef.nativeElement.innerText = 'Salvar';
+        });
     }
 
   }
 
   onFileChange(event) {
     let reader = new FileReader();
-   
-    if(event.target.files && event.target.files.length) {
+
+    if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
-    
+
       reader.onload = () => {
         this.revisaoForm.patchValue({
           arquivo: file.name
         });
         this.uploadedFile = file;
-        console.log('file uploaded',  file.name);
+        console.log('file uploaded', file.name);
       };
-      
+
     }
   }
 

@@ -11,6 +11,8 @@ import { AtualizaRevisao } from '../models/atualiza-revisao.model';
 })
 export class RevisaoAssinanteService {
 
+  private revisaoUploadCorrecao :Revisao;
+
   constructor(private http: HttpClient) { }
 
   obterRevisoes(): Observable<Revisao[]> {
@@ -21,6 +23,14 @@ export class RevisaoAssinanteService {
             return resp;
         })
     ); 
+  }
+
+  atualizarRevisaoUploadCorrecao(revisao :Revisao) {
+    this.revisaoUploadCorrecao = revisao;
+  }
+
+  obterRevisaoUploadCorrecao(): Revisao {
+    return this.revisaoUploadCorrecao;
   }
 
   obterRevisoesPendentes(): Observable<Revisao[]> {

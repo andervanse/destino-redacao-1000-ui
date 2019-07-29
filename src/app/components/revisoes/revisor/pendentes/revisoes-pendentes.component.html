@@ -15,6 +15,7 @@
           <h3>Carregando...</h3>
         </div>
         <div *ngIf="revisoes" class="container">
+          <h3 *ngIf="revisoes.length == 0">*Não há itens para esta lista</h3>
           <mat-list>
             <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
               <h4 mat-line>
@@ -23,7 +24,7 @@
                 </a>
               </h4>
               <p mat-line>
-                 <a mat-raised-button color="primary" routerLink="upload">Novo Upload</a>
+                <a mat-raised-button color="primary" (click)="uploadArquivoCorrecao(revisao)">Upload Correção</a>
               </p> 
               <p mat-line>postado: {{revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy'}} &nbsp; - &nbsp;
                           status: {{revisao.statusRevisao}}</p>

@@ -14,7 +14,9 @@
       <div *ngIf="isProcessing">
         <h3>Carregando...</h3>
       </div>
+      
       <div *ngIf="revisoes" class="container">
+        <h3 *ngIf="revisoes.length == 0">*Não há itens para esta lista</h3>
         <mat-list>
           <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
             <h4 mat-line>

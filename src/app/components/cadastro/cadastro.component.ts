@@ -61,13 +61,13 @@ export class CadastroComponent implements OnInit {
         this.isProcessing = false;
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
         this.router.navigate(['email-enviado']);        
-      }, (error) => {
+      }, (errorResponse) => {
         this.isProcessing = false;
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
 
-        for (var prop in error.error) {
-          this.errorMessage += '\n' + error.error[prop][0];
-        }
+        if (errorResponse.error.message)
+          this.errorMessage = errorResponse.error.message;
+
       });
     }
   }

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RevisaoAssinanteService } from 'src/app/services/revisao-assinante.service';
 import { DialogConfirmComponent } from '../confirmation-dialog.component';
 import { AtualizaRevisao } from 'src/app/models/atualiza-revisao.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-revisoes-pendentes',
@@ -19,7 +20,7 @@ export class RevisoesPendentesComponent implements OnInit {
 
   constructor (
     public dialog: MatDialog,
-    private authSvc: AuthService,
+    private router: Router,
     private revisaoSvc: RevisaoAssinanteService
   ) { }
 
@@ -38,28 +39,9 @@ export class RevisoesPendentesComponent implements OnInit {
 
   }
 
-  confirmaCheckOut(revisao :Revisao) {
-
-    const dialogRef = this.dialog.open(DialogConfirmComponent, {
-      width: '70%',
-      data: { title :'Atenção', content :'Deseja fazer o check-in desta Redação?' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(revisao);
-
-      if (result) {
-        let revisor = this.authSvc.obterUsuario();
-        let atualizaRevisao = new AtualizaRevisao();
-        atualizaRevisao.revisaoId   = revisao.id;
-        atualizaRevisao.assinanteId = revisao.assinanteId;
-        atualizaRevisao.revisorId   = revisor.id;
-        
-        this.revisaoSvc.atualizarRevisor(atualizaRevisao).subscribe(
-          (resp) => { console.log(resp); },
-          (errorResponse) => { console.error(errorResponse.error); }
-        );
-      }
-    });
+  uploadArquivoCorrecao(revisao :Revisao) {
+    this.revisaoSvc.atualizarRevisaoUploadCorrecao(revisao);
+    this.router.navigate(['../upload-correcao/', revisao.id]);
   }
+
 }
