@@ -5,6 +5,7 @@ import { MatButton } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Revisao } from 'src/app/models/revisao.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-upload-revisao',
@@ -22,6 +23,7 @@ export class UploadRevisaoComponent implements OnInit {
   @ViewChild('btnSalvar') btnLogin: MatButton;
 
   constructor(
+    private location: Location,
     private route: ActivatedRoute,
     private router: Router,
     private authSvc: AuthService,
@@ -85,10 +87,9 @@ export class UploadRevisaoComponent implements OnInit {
       this.revisaoSvc.uploadArquivoRevisao(formData)
         .subscribe((resp) => {
           this.errorMessage = null;
-          console.log(resp);
           this.isProcessing = false;
           this.btnLogin._elementRef.nativeElement.innerText = 'Salvar';
-          this.router.navigate(['./revisoes-assinante']);
+          this.location.back();
         }, (errorResponse) => {
           this.errorMessage = 'Erro ao processar arquivo';
           console.error(errorResponse);
@@ -111,7 +112,6 @@ export class UploadRevisaoComponent implements OnInit {
           arquivo: file.name
         });
         this.uploadedFile = file;
-        console.log('file uploaded', file.name);
       };
 
     }

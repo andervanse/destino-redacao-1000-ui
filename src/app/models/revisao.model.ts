@@ -5,6 +5,7 @@ export class Revisao {
     comentario: string;
     arquivo: Arquivo;
     statusRevisao: string;
+    tipoArquivo: string;
     dataPrevista: Date;
 }
 

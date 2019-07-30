@@ -19,8 +19,8 @@ export class RevisoesNovasComponent implements OnInit {
   errorMessage: string = null;
 
   constructor (
-    public router: Router,
-    public dialog: MatDialog,
+    private router: Router,
+    private dialog: MatDialog,
     private authSvc: AuthService,
     private revisaoSvc: RevisaoAssinanteService
   ) { }
@@ -48,7 +48,6 @@ export class RevisoesNovasComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(revisao);
 
       if (result) {
         let revisor = this.authSvc.obterUsuario();

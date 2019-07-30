@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Revisao } from '../models/revisao.model';
 import { environment } from 'src/environments/environment';
@@ -37,8 +37,8 @@ export class RevisaoAssinanteService {
 
     return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao/pendentes`)
     .pipe(
-        map((resp) => {
-           return resp;
+        map((resp) => {          
+          return resp;
         })
     ); 
   } 
@@ -64,6 +64,19 @@ export class RevisaoAssinanteService {
 
   atualizarRevisor(atualizaRevisao :AtualizaRevisao) {
     return this.http.patch<any>(`${environment.apiBaseUrl}/api/revisao`, atualizaRevisao)
+      .pipe(
+          map((resp) => {
+             return resp;
+          })
+      );
+  }
+
+  deletarRevisao(deletaRevisao :Revisao) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: deletaRevisao
+    };
+    
+    return this.http.delete<any>(`${environment.apiBaseUrl}/api/revisao/${deletaRevisao.arquivo.nome}`, httpOptions)
       .pipe(
           map((resp) => {
              return resp;
