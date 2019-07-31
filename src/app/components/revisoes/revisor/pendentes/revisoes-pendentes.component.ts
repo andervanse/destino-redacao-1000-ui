@@ -39,9 +39,42 @@ export class RevisoesPendentesComponent implements OnInit {
 
   }
 
+  onCloseErrorMessage() {
+    this.errorMessage = null;
+  }
+
   uploadArquivoCorrecao(revisao :Revisao) {
     this.revisaoSvc.atualizarRevisaoUploadCorrecao(revisao);
     this.router.navigate(['../upload-correcao/', revisao.id]);
+  }
+
+  private deletarRevisao(revisao :Revisao) {
+    
+    if (revisao.arquivo) {  
+      this.revisaoSvc.deletarRevisao(revisao).subscribe(
+      (resp) => {
+        this.isProcessing = false;
+        this.errorMessage = null;
+      }, (errorResponse) => {
+        this.isProcessing = false;
+        this.errorMessage = 'Falha ao deletar revisão.';
+        console.error(errorResponse.error);
+      });
+    }
+  } 
+
+  confirmarDelecaoRevisao(revisao :Revisao) {
+
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '70%',
+      data: { title :'Atenção', content :'Deseja excluir esta Correção?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deletarRevisao(revisao);
+      }
+    });
   }
 
 }

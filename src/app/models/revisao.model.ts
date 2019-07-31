@@ -1,6 +1,7 @@
 export class Revisao {
     id: number;
     assinanteId: number;
+    assinanteEmail: string;
     revisorId: number;
     comentario: string;
     arquivo: Arquivo;

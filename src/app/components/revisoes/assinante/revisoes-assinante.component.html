@@ -13,7 +13,7 @@
       <a mat-raised-button color="primary" *ngIf="revisoes && revisoes.length == 0" routerLink="../upload-revisao">Novo Upload</a>
       <br>
       <br>
-      <h3 *ngIf="errorMessage" class="error-color">{{ errorMessage }}</h3>
+      <h3 *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
       <div *ngIf="isProcessing">
         <h3>Carregando...</h3>
       </div>
@@ -24,14 +24,15 @@
             <mat-icon mat-list-icon>note</mat-icon>            
             <h4 mat-line>
               <a mat-button [href]="revisao.arquivo.url" target="_blank">
-                {{revisao.arquivo.nome}}
+                {{ revisao.arquivo.nome }}
               </a>   
-
-              <button *ngIf="revisao.statusRevisao == 'NovaRevisao'" mat-button color="warn" (click)="confirmarDelecaoRevisao(revisao)">Deletar</button>         
+              <div class="right">
+                <button *ngIf="revisao.statusRevisao != 'EmRevisao'" mat-button color="warn" [disabled]="isProcessing" (click)="confirmarDelecaoRevisao(revisao)">Deletar</button>
+              </div>
             </h4>
             <p mat-line> 
-              postado: {{revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy'}} &nbsp; - &nbsp;
-              status: {{revisao.statusRevisao}}  
+              postado: {{ revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy' }} &nbsp; - &nbsp;
+              status: {{ revisao.statusRevisao }}  
             </p>
           </mat-list-item>
         </mat-list>

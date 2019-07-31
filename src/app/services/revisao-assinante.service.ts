@@ -13,14 +13,17 @@ export class RevisaoAssinanteService {
 
   private revisaoUploadCorrecao :Revisao;
 
+  private revisoes :Revisao[];
+
   constructor(private http: HttpClient) { }
 
   obterRevisoes(): Observable<Revisao[]> {
 
     return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao`)
     .pipe(
-        map((resp) => {
-            return resp;
+        map((response) => {
+            this.revisoes = response;
+            return response;
         })
     ); 
   }
@@ -37,8 +40,9 @@ export class RevisaoAssinanteService {
 
     return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao/pendentes`)
     .pipe(
-        map((resp) => {          
-          return resp;
+        map((response) => {  
+          this.revisoes = response;        
+          return this.revisoes;
         })
     ); 
   } 
@@ -47,8 +51,9 @@ export class RevisaoAssinanteService {
 
     return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao/novas`)
     .pipe(
-        map((resp) => {
-           return resp;
+        map((response) => {
+          this.revisoes = response;        
+          return this.revisoes;
         })
     ); 
   }   
@@ -56,8 +61,8 @@ export class RevisaoAssinanteService {
   uploadArquivoRevisao(file:any) {
     return this.http.post<any>(`${environment.apiBaseUrl}/api/revisao`, file)
       .pipe(
-          map((resp) => {
-             return resp;
+          map((response) => {
+            return response;
           })
       );
   }
@@ -65,8 +70,8 @@ export class RevisaoAssinanteService {
   atualizarRevisor(atualizaRevisao :AtualizaRevisao) {
     return this.http.patch<any>(`${environment.apiBaseUrl}/api/revisao`, atualizaRevisao)
       .pipe(
-          map((resp) => {
-             return resp;
+          map((response) => {            
+            return response;
           })
       );
   }
@@ -76,10 +81,13 @@ export class RevisaoAssinanteService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: deletaRevisao
     };
     
+    var revisaoIdx = this.revisoes.findIndex(r => r.id == deletaRevisao.id);
+    this.revisoes.splice(revisaoIdx, 1);
+
     return this.http.delete<any>(`${environment.apiBaseUrl}/api/revisao/${deletaRevisao.arquivo.nome}`, httpOptions)
       .pipe(
-          map((resp) => {
-             return resp;
+          map((response) => {
+             return response;
           })
       );
   }

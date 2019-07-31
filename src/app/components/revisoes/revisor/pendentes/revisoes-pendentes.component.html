@@ -10,7 +10,7 @@
   <div class="center">
     <mat-card>
       <mat-card-content>
-        <h3 *ngIf="errorMessage" class="error-color">{{errorMessage}}</h3>
+        <h3 *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
         <div *ngIf="isProcessing">
           <h3>Carregando...</h3>
         </div>
@@ -20,15 +20,19 @@
             <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
               <p mat-line *ngIf="revisao.arquivo.tipoArquivo == 'Revisao'">
                   <a mat-raised-button color="primary" (click)="uploadArquivoCorrecao(revisao)">Upload Correção</a>
-              </p>               
+              </p>
               <h4 mat-line>
                   <a mat-button [href]="revisao.arquivo.url" target="_blank">
-                    {{revisao.arquivo.nome}}
+                    {{ revisao.arquivo.nome }}
                   </a>
+                  <button *ngIf="revisao.arquivo.tipoArquivo == 'Correcao'" mat-button color="warn" (click)="confirmarDelecaoRevisao(revisao)">Deletar</button>
               </h4>
+              <p mat-line>
+                  e-mail: {{ revisao.assinanteEmail }}
+              </p>
               <p mat-line *ngIf="revisao.arquivo.tipoArquivo == 'Revisao'">
-                  postado: {{revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy'}} &nbsp; - &nbsp;
-                   status: {{revisao.statusRevisao}}
+                  postado: {{ revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy' }} &nbsp; - &nbsp;
+                   status: {{ revisao.statusRevisao }}
               </p>              
               <br>
             </mat-list-item>

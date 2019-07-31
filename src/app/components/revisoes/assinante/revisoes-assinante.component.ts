@@ -37,6 +37,10 @@ export class RevisoesAssinanteComponent implements OnInit {
 
   }
 
+  onCloseErrorMessage() {
+    this.errorMessage = null;
+  }
+
   private deletarRevisao(revisao :Revisao) {
     
     if (revisao.arquivo) {  
