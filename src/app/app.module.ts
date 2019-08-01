@@ -34,6 +34,7 @@ import { RevisoesPendentesComponent } from './components/revisoes/revisor/penden
 import { DialogConfirmComponent } from './components/revisoes/revisor/confirmation-dialog.component';
 import { PainelRevisorComponent } from './components/revisoes/revisor/painel-revisor/painel-revisor.component';
 import { RedacoesComponent } from './components/redacoes/redacoes.component';
+import { RevisoesFinalizadasComponent } from './components/revisoes/revisor/finalizadas/revisoes-finalizadas.component';
 
 
 const appRouter = [
@@ -52,6 +53,7 @@ const appRouter = [
   { path:'upload-correcao/:revisaoId', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
   { path:'revisoes-novas', component: RevisoesNovasComponent, canActivate: [AuthGuardService] },
   { path:'revisoes-pendentes', component: RevisoesPendentesComponent, canActivate: [AuthGuardService] },
+  { path:'revisoes-finalizadas', component: RevisoesFinalizadasComponent, canActivate: [AuthGuardService] },
   { path:'painel-revisor', component: PainelRevisorComponent, canActivate: [AuthGuardService] },
   { path:'contato', component: ContatoComponent },
   { path:'sobre', component: SobreComponent }
@@ -78,7 +80,8 @@ const appRouter = [
     DialogConfirmComponent,
     RevisoesPendentesComponent,
     PainelRevisorComponent,
-    RedacoesComponent
+    RedacoesComponent,
+    RevisoesFinalizadasComponent
   ],
   imports: [
     BrowserModule,

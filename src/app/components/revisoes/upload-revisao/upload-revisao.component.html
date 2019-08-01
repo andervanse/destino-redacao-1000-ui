@@ -12,7 +12,8 @@
       <mat-card-content>
         <br>
         <br>
-        <h3 *ngIf="errorMessage" class="error-color">{{errorMessage}}</h3>
+        <h3 *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
+        <br>
         <h3>Clique no botão abaixo para fazer o upload do seu arquivo</h3>
         <br>
         <form [formGroup]="revisaoForm" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" novalidate (ngSubmit)="onSubmit()">

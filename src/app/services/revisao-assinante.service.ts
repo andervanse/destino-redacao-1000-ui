@@ -46,6 +46,17 @@ export class RevisaoAssinanteService {
         })
     ); 
   } 
+
+  obterRevisoesFinalizadas(): Observable<Revisao[]> {
+
+    return this.http.get<Revisao[]>(`${environment.apiBaseUrl}/api/revisao/finalizadas`)
+    .pipe(
+        map((response) => {  
+          this.revisoes = response;        
+          return this.revisoes;
+        })
+    ); 
+  }   
   
   obterRevisoesNovas(): Observable<Revisao[]> {
 

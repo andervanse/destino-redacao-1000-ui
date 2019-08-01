@@ -2,7 +2,7 @@
   <mat-card id="banner">
     <mat-card-content>
       <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
-      <h2>Revisões Novas</h2>
+      <h2>Revisões Finalizadas</h2>
     </mat-card-content>
   </mat-card>
 </section>
@@ -10,38 +10,35 @@
 <div class="center">
   <mat-card>
     <mat-card-content>
-      <h3 *ngIf="errorMessage" class="error-color">{{errorMessage}}</h3>
+      <h3 *ngIf="errorMessage" class="error-color">{{ errorMessage }}</h3>
       <div *ngIf="isProcessing">
         <h3>Carregando...</h3>
       </div>
-      
+
       <div *ngIf="revisoes" class="container">
         <h3 *ngIf="revisoes.length == 0">*Não há itens para esta lista</h3>
         <mat-list>
           <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
             <h4 mat-line>
               <a mat-button [href]="revisao.arquivo.url" target="_blank">
-                {{revisao.arquivo.nome}}
+                {{ revisao.arquivo.nome }}
               </a>
             </h4>
             <p mat-line>
                 e-mail: {{ revisao.assinanteEmail }}
-            </p>            
+            </p>
             <p mat-line>
-               <button mat-stroked-button color="primary" (click)="confirmaCheckOut(revisao)">
-                 Check-out
-               </button>
-            </p> 
-            <p mat-line>postado: {{revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy'}} &nbsp; - &nbsp;
-                        status: {{revisao.statusRevisao}}</p>
-            <br>
+              postado: {{ revisao.arquivo.dataAtualizacao | date:'dd/MM/yyyy' }} &nbsp; - &nbsp;
+               status: {{ revisao.statusRevisao }} &nbsp; - &nbsp;
+                 tipo: {{ revisao.arquivo.tipoArquivo }}
+            </p>
           </mat-list-item>
         </mat-list>
       </div>
     </mat-card-content>
   </mat-card>
   <br>
-  <br>  
+  <br>
   <a mat-raised-button color="primary" routerLink="../painel-revisor">Voltar</a>
 </div>
 <br>

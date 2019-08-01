@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         } else if (errorResponse.status == 400) {
           this.errorMessage = 'Usuário ou Senha inválidos';
         } else if (errorResponse.status == 0) {
-            this.errorMessage = 'Serviço indisponível'
+            this.errorMessage = 'Serviço indisponível';
         } else {
             this.errorMessage = errorResponse.statusText;
         }

@@ -100,21 +100,39 @@ export class UploadRevisaoComponent implements OnInit {
 
   }
 
+  onCloseErrorMessage() {
+    this.errorMessage = null;
+  }
+
   onFileChange(event) {
     let reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
-      reader.readAsDataURL(file);
+      
+      if (file.size > 0 && (file.size/1024 > 1500)) {
+        this.errorMessage = 'Tamanho do arquivo excede o limite de 1.5Mb';
+        return;
+      }
 
-      reader.onload = () => {
-        this.revisaoForm.patchValue({
-          arquivo: file.name
-        });
-        this.uploadedFile = file;
-      };
+      if (file.name == this.trataNomeArquivo(file.name)) {
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+          this.revisaoForm.patchValue({
+            arquivo: file.name
+          });
+          this.uploadedFile = file;
+        };
+      } else {
+        this.errorMessage = 'Nome do arquivo não pode conter caracteres especiais.'
+      }
 
     }
+  }
+
+  private trataNomeArquivo(nmArquivo :string) {
+     return nmArquivo.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
 }
