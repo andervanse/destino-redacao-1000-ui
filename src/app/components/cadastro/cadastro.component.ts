@@ -13,15 +13,15 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 })
 export class CadastroComponent implements OnInit {
 
-  cadastroForm :FormGroup;
-  errorMessage :string;
-  isProcessing :boolean;
+  cadastroForm: FormGroup;
+  errorMessage: string;
+  isProcessing: boolean;
   @ViewChild('btnSalvarCadastro') btnSalvar: MatButton;
-  
+
   constructor(
     private router: Router,
     private usuarioService: AssinanteService) { }
-      
+
   ngOnInit() {
     this.isProcessing = false;
     this.errorMessage = '';
@@ -37,7 +37,7 @@ export class CadastroComponent implements OnInit {
   onSubmit() {
     this.errorMessage = '';
     this.btnSalvar._elementRef.nativeElement.innerText = 'Aguarde';
-  
+
     if (this.cadastroForm.valid) {
       this.isProcessing = true;
 
@@ -48,26 +48,28 @@ export class CadastroComponent implements OnInit {
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
         return;
       }
-      
+
       let usrSenha = new Usuario();
       usrSenha.id = null;
       usrSenha.login = this.cadastroForm.value.email,
-      usrSenha.nome = this.cadastroForm.value.nome,
-      usrSenha.email = this.cadastroForm.value.email,
-      usrSenha.senha = this.cadastroForm.value.senha,
-      usrSenha.confirmaSenha = this.cadastroForm.value.confirmaSenha;
+        usrSenha.nome = this.cadastroForm.value.nome,
+        usrSenha.email = this.cadastroForm.value.email,
+        usrSenha.senha = this.cadastroForm.value.senha,
+        usrSenha.confirmaSenha = this.cadastroForm.value.confirmaSenha;
 
-      this.usuarioService.salvar(usrSenha).subscribe((resp) => {        
+      this.usuarioService.salvar(usrSenha).subscribe((resp) => {
         this.isProcessing = false;
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
-        this.router.navigate(['email-enviado']);        
+        this.router.navigate(['email-enviado']);
       }, (errorResponse) => {
         this.isProcessing = false;
         this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
 
-        if (errorResponse.error.message)
+        if (errorResponse.status == 0) {
+          this.errorMessage = 'Serviço indisponível';
+        } else if (errorResponse.error.message) {
           this.errorMessage = errorResponse.error.message;
-
+        }
       });
     }
   }
@@ -78,8 +80,8 @@ export class CadastroComponent implements OnInit {
 
   getEmailErrorMessage() {
     return this.cadastroForm.controls['email'].hasError('required') ? 'Campo Obrigatório' :
-        this.cadastroForm.controls['email'].hasError('email') ? 'E-Mail inválido' :
-            '';
+      this.cadastroForm.controls['email'].hasError('email') ? 'E-Mail inválido' :
+        '';
   }
 
   getNomeErrorMessage() {
