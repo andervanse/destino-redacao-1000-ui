@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Revisao } from 'src/app/models/revisao.model';
 import { MatDialog } from '@angular/material';
-import { AuthService } from 'src/app/services/auth.service';
 import { RevisaoAssinanteService } from 'src/app/services/revisao-assinante.service';
 import { DialogConfirmComponent } from '../confirmation-dialog.component';
-import { AtualizaRevisao } from 'src/app/models/atualiza-revisao.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -51,15 +49,17 @@ export class RevisoesPendentesComponent implements OnInit {
   private deletarRevisao(revisao :Revisao) {
     
     if (revisao.arquivo) {  
-      this.revisaoSvc.deletarRevisao(revisao).subscribe(
-      (resp) => {
-        this.isProcessing = false;
-        this.errorMessage = null;
-      }, (errorResponse) => {
-        this.isProcessing = false;
-        this.errorMessage = 'Falha ao deletar revisão.';
-        console.error(errorResponse.error);
-      });
+      this.revisaoSvc.excluirRevisao(revisao)
+          .subscribe(
+            (resp) => {
+              this.isProcessing = false;
+              this.errorMessage = null;
+              revisao.arquivo = null;
+            }, (errorResponse) => {
+              this.isProcessing = false;
+              this.errorMessage = 'Falha ao deletar revisão.';
+              console.error(errorResponse.error);
+          });
     }
   } 
 

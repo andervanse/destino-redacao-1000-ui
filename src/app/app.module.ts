@@ -35,6 +35,7 @@ import { DialogConfirmComponent } from './components/revisoes/revisor/confirmati
 import { PainelRevisorComponent } from './components/revisoes/revisor/painel-revisor/painel-revisor.component';
 import { RedacoesComponent } from './components/redacoes/redacoes.component';
 import { RevisoesFinalizadasComponent } from './components/revisoes/revisor/finalizadas/revisoes-finalizadas.component';
+import { PostagensComponent } from './components/postagens/postagens.component';
 
 
 const appRouter = [
@@ -46,8 +47,8 @@ const appRouter = [
   { path:'confirmar-email/:email/:codigo', component: ConfirmaEmailComponent },
   { path:'reset-password/:email/:codigo', component: RedefinirSenhaComponent },  
   { path:'entrar', component: LoginComponent },
-  { path:'quiz', component: QuizComponent },  
-  { path:'redacoes', component: RedacoesComponent },
+  { path:'quiz', component: QuizComponent },
+  { path:'redacoes', component: PostagensComponent },
   { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'upload-revisao', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
   { path:'upload-correcao/:revisaoId', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
@@ -81,7 +82,8 @@ const appRouter = [
     RevisoesPendentesComponent,
     PainelRevisorComponent,
     RedacoesComponent,
-    RevisoesFinalizadasComponent
+    RevisoesFinalizadasComponent,
+    PostagensComponent
   ],
   imports: [
     BrowserModule,

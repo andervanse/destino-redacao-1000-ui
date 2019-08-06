@@ -44,7 +44,7 @@ export class RevisoesAssinanteComponent implements OnInit {
   private deletarRevisao(revisao :Revisao) {
     
     if (revisao.arquivo) {  
-      this.revisaoSvc.deletarRevisao(revisao).subscribe(
+      this.revisaoSvc.excluirRevisao(revisao).subscribe(
       (resp) => {
         this.isProcessing = false;
         this.errorMessage = null;

@@ -87,7 +87,7 @@ export class RevisaoAssinanteService {
       );
   }
 
-  deletarRevisao(deletaRevisao :Revisao) {
+  excluirRevisao(deletaRevisao :Revisao) {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: deletaRevisao
     };

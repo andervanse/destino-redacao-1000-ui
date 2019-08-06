@@ -19,6 +19,9 @@
         <h3 *ngIf="revisoes.length == 0">*Não há itens para esta lista</h3>
         <mat-list>
           <mat-list-item *ngFor="let revisao of revisoes" class="revisao-item">
+            <p mat-line *ngIf="revisao.arquivo.tipoArquivo == 'Revisao'">
+              <a mat-raised-button color="primary" (click)="uploadArquivoCorrecao(revisao)">Upload Correção</a>
+            </p>
             <h4 mat-line>
               <a mat-button [href]="revisao.arquivo.url" target="_blank">
                 {{ revisao.arquivo.nome }}
@@ -32,6 +35,7 @@
                status: {{ revisao.statusRevisao }} &nbsp; - &nbsp;
                  tipo: {{ revisao.arquivo.tipoArquivo }}
             </p>
+            <button *ngIf="revisao.arquivo.tipoArquivo == 'Correcao'" mat-button color="warn" (click)="onConfirmarExclusao(revisao)">Deletar</button>
           </mat-list-item>
         </mat-list>
       </div>

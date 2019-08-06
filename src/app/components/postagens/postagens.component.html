@@ -1,0 +1,36 @@
+<section class="center">
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h1>Redações</h1>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+<br>
+<br>
+<br>
+
+<h3 *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
+<div *ngIf="isProcessing">
+  <h3 class="center">Carregando...</h3>
+</div>
+<h3 class="center" *ngIf="postagens && postagens.length == 0">*Não há Postagens</h3>
+
+<mat-card class="center" *ngFor="let postagem of postagens">
+  <mat-card-content>    
+    <h2>{{ postagem.titulo }}</h2>
+    <div [innerHTML]="postagem.texto" >      
+    </div>
+    <br>
+    <br>
+    <div class="container">
+      <img mat-card-image class="center" [src]="postagem.urlImagem">
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<br>
+<br>
+<br>
+<br>

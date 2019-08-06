@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Revisao } from 'src/app/models/revisao.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { Location } from '@angular/common';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-upload-revisao',
@@ -73,10 +74,17 @@ export class UploadRevisaoComponent implements OnInit {
       }
 
       if (this.revisaoIdRef) {
-        let revisao = this.revisaoSvc.obterRevisaoUploadCorrecao();
-        formData.append('assinanteId', revisao.assinanteId.toString());  
-        formData.append('revisaoIdRef', revisao.id.toString());
-        formData.append('tipoArquivo', 'correcao');
+        let revisaoRef = this.revisaoSvc.obterRevisaoUploadCorrecao();
+
+        if (!isNullOrUndefined(revisaoRef)) {
+          formData.append('assinanteId', revisaoRef.assinanteId.toString());  
+          formData.append('revisaoIdRef', revisaoRef.id.toString());
+          formData.append('arquivoRef', revisaoRef.arquivo.nome);
+          formData.append('tipoArquivo', 'correcao');
+        } else {
+          this.errorMessage = 'Revisão de referência não encontrado.';
+          return;
+        }
       } else {
         formData.append('tipoArquivo', 'revisao');
       }

@@ -9,7 +9,15 @@
       <a mat-list-item href="#" routerLink="redacoes"           (click)="drawer.toggle()">Redações</a>
       <a mat-list-item href="#" routerLink="cadastro"           *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Cadastre-se</a>
       <a mat-list-item href="#" routerLink="entrar"             *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Entrar</a>
-      <a mat-list-item href="#" routerLink="revisoes-assinante" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Minhas Redações</a>       
+
+      <div *ngIf="isAdmin(); then revisoes else redacoes"></div>
+      <ng-template #revisoes>
+         <a mat-list-item href="#" routerLink="painel-revisor" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Revisões</a>       
+      </ng-template>
+      <ng-template #redacoes>         
+         <a mat-list-item href="#" routerLink="revisoes-assinante" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Minhas Redações</a>       
+      </ng-template>
+      
       <hr>
       <a mat-list-item href="#" *ngIf="isAuthenticated()" (click)="logout(drawer)">Sair</a>
     </mat-nav-list>
