@@ -30,9 +30,9 @@ export class PostagemService {
       );
   }  
 
-  salvarPostagem(postagem: Postagem): Observable<any> {
+  salvarPostagem(formData: FormData): Observable<any> {
 
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/postagem`, postagem)
+    return this.http.post<any>(`${environment.apiBaseUrl}/api/postagem`, formData)
     .pipe(
         map((response) => {
             return response;

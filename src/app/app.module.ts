@@ -36,6 +36,7 @@ import { PainelRevisorComponent } from './components/revisoes/revisor/painel-rev
 import { RedacoesComponent } from './components/redacoes/redacoes.component';
 import { RevisoesFinalizadasComponent } from './components/revisoes/revisor/finalizadas/revisoes-finalizadas.component';
 import { PostagensComponent } from './components/postagens/postagens.component';
+import { EditarPostagemComponent } from './components/postagens/editar-postagem/editar-postagem.component';
 
 
 const appRouter = [
@@ -49,6 +50,7 @@ const appRouter = [
   { path:'entrar', component: LoginComponent },
   { path:'quiz', component: QuizComponent },
   { path:'redacoes', component: PostagensComponent },
+  { path:'redacoes/editar', component: EditarPostagemComponent },  
   { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'upload-revisao', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
   { path:'upload-correcao/:revisaoId', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
@@ -83,7 +85,8 @@ const appRouter = [
     PainelRevisorComponent,
     RedacoesComponent,
     RevisoesFinalizadasComponent,
-    PostagensComponent
+    PostagensComponent,
+    EditarPostagemComponent
   ],
   imports: [
     BrowserModule,

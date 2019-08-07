@@ -1,0 +1,69 @@
+<section class="center">
+  <mat-card id="banner">
+    <mat-card-content>
+      <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
+      <h2>Postagem</h2>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+<section class="center">
+  <mat-card *ngIf="errorMessage">
+    <mat-card-content>
+      <h2 class="error-color">{{ errorMessage }}</h2>
+      <mat-card-footer>
+        <div class="container">
+          <button mat-raised-button color="error" type="button" (click)="onNotificationClick()">Fechar</button>
+        </div>
+        <br>
+      </mat-card-footer>
+    </mat-card-content>
+  </mat-card>
+</section>
+<br>
+<br>
+
+<div class="center">
+  <mat-card>
+    <mat-card-content>
+        <h3>Clique no botão abaixo para fazer o upload do seu arquivo</h3>
+        <br>
+        <form [formGroup]="postagemForm" novalidate (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="id"/>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Título" minlength="5" maxlength="60" 
+              formControlName="titulo">
+            <mat-error *ngIf="postagemForm.controls['titulo'].invalid">*Campo inválido</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field>
+            <textarea matInput placeholder="Texto" type="text" minlength="5" maxlength="1000"
+              formControlName="texto" rows="4"></textarea>
+            <mat-error *ngIf="postagemForm.controls['texto'].invalid">*Campo inválido</mat-error>
+          </mat-form-field>
+          <br>
+          <br>          
+          <div class="upload-btn-wrapper">
+            <button class="btn" mat-raised-button type="button">Upload da imagem</button>
+            <input type="file" (change)="onFileChange($event)" accept="image/*" />
+            <br>
+            <br>
+            <mat-form-field>
+               <input matInput type="text" formControlName="imagem" readonly/>
+            </mat-form-field>
+          </div>
+          <br>
+          <br>
+          <button mat-raised-button type="submit" [disabled]="postagemForm.invalid || postagemForm.pristine || isProcessing" #btnSalvar>Salvar</button>
+        </form>        
+    </mat-card-content>
+    <br>
+  </mat-card>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
