@@ -11,7 +11,7 @@
 <br>
 <br>
 
-<h3 *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
+<h3 class="center" *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
 <div *ngIf="isProcessing">
   <h3 class="center">Carregando...</h3>
 </div>
@@ -20,16 +20,23 @@
 <mat-card class="center" *ngFor="let postagem of postagens">
   <mat-card-content>    
     <h2>{{ postagem.titulo }}</h2>
-    <div [innerHTML]="postagem.texto" >      
-    </div>
-    <br>
-    <br>
+    <p [innerHTML]="postagem.texto" >      
+    </p>
     <div class="container">
-      <img mat-card-image class="center" [src]="postagem.urlImagem">
+      <br>
+      <img *ngIf="postagem.urlImagem" mat-card-image class="center" [src]="postagem.urlImagem">
+    </div>
+    <div *ngIf="isAdmin()">
+      <button mat-raised-button color="primary" type="button" (click)="onEditarPostagem(postagem)">Editar</button>
+      &nbsp;&nbsp;
+      <button mat-raised-button color="warn" type="button" (click)="onConfirmarExclusaoPostagem(postagem)">Excluir</button>
     </div>
   </mat-card-content>
 </mat-card>
-
+<br>
+<div class="container" *ngIf="isAdmin()">
+  <button mat-raised-button color="primary" type="button" (click)="onNovaPostagem()">Novo</button>
+</div>
 <br>
 <br>
 <br>

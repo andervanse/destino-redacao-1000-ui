@@ -31,12 +31,13 @@ import { RevisoesAssinanteComponent } from './components/revisoes/assinante/revi
 import { UploadRevisaoComponent } from './components/revisoes/upload-revisao/upload-revisao.component';
 import { RevisoesNovasComponent } from './components/revisoes/revisor/novas/revisoes-novas.component';
 import { RevisoesPendentesComponent } from './components/revisoes/revisor/pendentes/revisoes-pendentes.component';
-import { DialogConfirmComponent } from './components/revisoes/revisor/confirmation-dialog.component';
+import { DialogConfirmComponent } from './components/dialog/confirmation-dialog.component';
 import { PainelRevisorComponent } from './components/revisoes/revisor/painel-revisor/painel-revisor.component';
 import { RedacoesComponent } from './components/redacoes/redacoes.component';
 import { RevisoesFinalizadasComponent } from './components/revisoes/revisor/finalizadas/revisoes-finalizadas.component';
 import { PostagensComponent } from './components/postagens/postagens.component';
 import { EditarPostagemComponent } from './components/postagens/editar-postagem/editar-postagem.component';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 
 const appRouter = [
@@ -50,14 +51,14 @@ const appRouter = [
   { path:'entrar', component: LoginComponent },
   { path:'quiz', component: QuizComponent },
   { path:'redacoes', component: PostagensComponent },
-  { path:'redacoes/editar', component: EditarPostagemComponent },  
+  { path:'postagem/editar/:id', component: EditarPostagemComponent, canActivate: [AdminAuthGuardService] },  
   { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'upload-revisao', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
-  { path:'upload-correcao/:revisaoId', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
-  { path:'revisoes-novas', component: RevisoesNovasComponent, canActivate: [AuthGuardService] },
-  { path:'revisoes-pendentes', component: RevisoesPendentesComponent, canActivate: [AuthGuardService] },
-  { path:'revisoes-finalizadas', component: RevisoesFinalizadasComponent, canActivate: [AuthGuardService] },
-  { path:'painel-revisor', component: PainelRevisorComponent, canActivate: [AuthGuardService] },
+  { path:'upload-correcao/:revisaoId', component: UploadRevisaoComponent, canActivate: [AdminAuthGuardService] },  
+  { path:'revisoes-novas', component: RevisoesNovasComponent, canActivate: [AdminAuthGuardService] },
+  { path:'revisoes-pendentes', component: RevisoesPendentesComponent, canActivate: [AdminAuthGuardService] },
+  { path:'revisoes-finalizadas', component: RevisoesFinalizadasComponent, canActivate: [AdminAuthGuardService] },
+  { path:'painel-revisor', component: PainelRevisorComponent, canActivate: [AdminAuthGuardService] },
   { path:'contato', component: ContatoComponent },
   { path:'sobre', component: SobreComponent }
 ];
@@ -114,6 +115,7 @@ const appRouter = [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false} },
     AuthGuardService,
+    AdminAuthGuardService,
     AuthService,
     RevisaoAssinanteService],
   bootstrap: [AppComponent]

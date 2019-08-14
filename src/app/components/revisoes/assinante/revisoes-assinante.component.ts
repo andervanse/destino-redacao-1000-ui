@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RevisaoAssinanteService } from 'src/app/services/revisao-assinante.service';
 import { Revisao } from 'src/app/models/revisao.model';
 import { MatDialog } from '@angular/material';
-import { DialogConfirmComponent } from '../revisor/confirmation-dialog.component';
+import { DialogConfirmComponent } from '../../dialog/confirmation-dialog.component';
 
 
 @Component({

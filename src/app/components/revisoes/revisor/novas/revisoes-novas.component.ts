@@ -4,7 +4,7 @@ import { RevisaoAssinanteService } from 'src/app/services/revisao-assinante.serv
 import { MatDialog } from '@angular/material/dialog';
 import { AtualizaRevisao } from 'src/app/models/atualiza-revisao.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { DialogConfirmComponent } from '../confirmation-dialog.component';
+import { DialogConfirmComponent } from '../../../dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({

@@ -3,7 +3,7 @@ import { Revisao } from 'src/app/models/revisao.model';
 import { RevisaoAssinanteService } from 'src/app/services/revisao-assinante.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { DialogConfirmComponent } from '../confirmation-dialog.component';
+import { DialogConfirmComponent } from '../../../dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-revisoes-finalizadas',

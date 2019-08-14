@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatButton } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { isNullOrUndefined } from 'util';
 import { Postagem } from 'src/app/models/postagem.model';
 import { PostagemService } from 'src/app/services/postagem.service';
@@ -21,24 +21,46 @@ import { PostagemService } from 'src/app/services/postagem.service';
 export class EditarPostagemComponent implements OnInit {
 
   postagemForm: FormGroup;
+  postagemId: number;
   errorMessage: string;
   isProcessing: boolean;
+  postagem :Postagem = new Postagem();
   @ViewChild('btnSalvar') btnSalvar: MatButton;
   private imageFile: File | null = null;
  
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private postagemSrv: PostagemService) { }
 
     ngOnInit() {
       this.isProcessing = false;
       this.errorMessage = '';
-  
+
+      this.postagem = new Postagem();
+
       this.postagemForm = new FormGroup({
         id: new FormControl('', []),
         titulo: new FormControl('', [Validators.required]),
         texto: new FormControl('', [Validators.required]),
-        imagem: new FormControl(null, [Validators.required])
+        imagem: new FormControl(null, [])
+      });
+
+      this.route.params.subscribe((params) => {
+        this.postagemId = +params['id'];
+
+        this.postagemSrv.obterPostagem(this.postagemId)
+            .subscribe((postagem :Postagem) => {
+
+               if (postagem)
+                  this.postagem = postagem;
+
+               if (this.postagem) {
+                  this.postagemForm.get('id').setValue(this.postagem.id);
+                  this.postagemForm.get('titulo').setValue(this.postagem.titulo);
+                  this.postagemForm.get('texto').setValue(this.postagem.texto);
+               }
+            });
       });
     }
 
@@ -66,6 +88,9 @@ export class EditarPostagemComponent implements OnInit {
             imagem: file.name
           });
           this.imageFile = file;
+
+          if (this.postagem)
+             this.postagem.urlImagem = null;
         };
       }
     }
@@ -87,13 +112,15 @@ export class EditarPostagemComponent implements OnInit {
         const formData = new FormData();
         formData.append('id', this.postagemForm.value.id);  
         formData.append('titulo', this.postagemForm.value.titulo);  
-        formData.append('texto', this.postagemForm.value.texto);
+        formData.append('texto', this.postagemForm.value.texto);        
+        formData.append('urlImagem', this.postagem? this.postagem.urlImagem : '');
         formData.append('arquivo', this.imageFile);
   
         this.postagemSrv.salvarPostagem(formData).subscribe(
           (resp) => {
             this.isProcessing = false;
             this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';
+            this.router.navigate(['./']);
           }, (errorResponse) => {
             this.isProcessing = false;
             this.btnSalvar._elementRef.nativeElement.innerText = 'Salvar';

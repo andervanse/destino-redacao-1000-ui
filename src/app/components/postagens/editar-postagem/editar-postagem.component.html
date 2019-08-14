@@ -25,8 +25,7 @@
 
 <div class="center">
   <mat-card>
-    <mat-card-content>
-        <h3>Clique no botão abaixo para fazer o upload do seu arquivo</h3>
+    <mat-card-content>        
         <br>
         <form [formGroup]="postagemForm" novalidate (ngSubmit)="onSubmit()">
           <input type="hidden" formControlName="id"/>
@@ -45,6 +44,10 @@
           </mat-form-field>
           <br>
           <br>          
+          <div *ngIf="postagem?.urlImagem" class="container">
+            <br>
+            <img mat-card-image class="center" [src]="postagem.urlImagem">
+          </div>
           <div class="upload-btn-wrapper">
             <button class="btn" mat-raised-button type="button">Upload da imagem</button>
             <input type="file" (change)="onFileChange($event)" accept="image/*" />
