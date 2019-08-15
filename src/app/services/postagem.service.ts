@@ -16,8 +16,8 @@ export class PostagemService {
     this.postagens = [];
   }
 
-  obterPostagens(): Observable<Postagem[]> {
-    return this.http.get<Postagem[]>(`${environment.apiBaseUrl}/api/postagem`)
+  obterPostagens(categoria :string): Observable<Postagem[]> {
+    return this.http.get<Postagem[]>(`${environment.apiBaseUrl}/api/postagem/${categoria}`)
     .pipe(
         map((response) => {
             this.postagens = response;

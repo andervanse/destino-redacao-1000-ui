@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Postagem } from 'src/app/models/postagem.model';
 import { PostagemService } from 'src/app/services/postagem.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DialogConfirmComponent } from '../dialog/confirmation-dialog.component';
 
@@ -19,6 +19,7 @@ export class PostagensComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private route: ActivatedRoute,
     private router: Router,
     private authSvc: AuthService,
     private postagemSvc: PostagemService
@@ -26,18 +27,21 @@ export class PostagensComponent implements OnInit {
 
   ngOnInit() {
     this.isProcessing = true;
-
-    this.postagemSvc.obterPostagens()
-        .subscribe(
-          (resp) => {
-            this.isProcessing = false;
-            this.errorMessage = null;
-            this.postagens = resp;
-          }, (errorResponse) => {
-            this.isProcessing = false;
-            this.errorMessage = 'Falha ao consultar Posts.';
-            console.error(errorResponse.error);
-        });    
+    
+    this.route.params.subscribe((params) => {
+      let categoria = params['categoria'];
+      this.postagemSvc.obterPostagens(categoria)
+      .subscribe(
+        (resp) => {
+          this.isProcessing = false;
+          this.errorMessage = null;
+          this.postagens = resp;
+        }, (errorResponse) => {
+          this.isProcessing = false;
+          this.errorMessage = 'Falha ao consultar Posts.';
+          console.error(errorResponse.error);
+      }); 
+    })   
   }
 
   isAdmin():boolean {

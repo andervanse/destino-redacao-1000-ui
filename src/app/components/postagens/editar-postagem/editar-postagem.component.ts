@@ -43,6 +43,7 @@ export class EditarPostagemComponent implements OnInit {
         id: new FormControl('', []),
         titulo: new FormControl('', [Validators.required]),
         texto: new FormControl('', [Validators.required]),
+        categoria: new FormControl('', [Validators.required]),
         imagem: new FormControl(null, [])
       });
 
@@ -59,6 +60,7 @@ export class EditarPostagemComponent implements OnInit {
                   this.postagemForm.get('id').setValue(this.postagem.id);
                   this.postagemForm.get('titulo').setValue(this.postagem.titulo);
                   this.postagemForm.get('texto').setValue(this.postagem.texto);
+                  this.postagemForm.get('categoria').setValue(this.postagem.categoria);
                }
             });
       });
@@ -112,7 +114,8 @@ export class EditarPostagemComponent implements OnInit {
         const formData = new FormData();
         formData.append('id', this.postagemForm.value.id);  
         formData.append('titulo', this.postagemForm.value.titulo);  
-        formData.append('texto', this.postagemForm.value.texto);        
+        formData.append('texto', this.postagemForm.value.texto);
+        formData.append('categoria', this.postagemForm.value.categoria);
         formData.append('urlImagem', this.postagem? this.postagem.urlImagem : '');
         formData.append('arquivo', this.imageFile);
   

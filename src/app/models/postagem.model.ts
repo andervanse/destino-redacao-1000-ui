@@ -5,4 +5,6 @@ export class Postagem {
     titulo: string;
     texto: string;
     urlImagem: string;
+    categoria: string;
+    dataAtualizacao: Date;
 }

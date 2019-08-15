@@ -11,11 +11,15 @@
 <br>
 <br>
 
-<h3 class="center" *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
+<h3 class="container" *ngIf="errorMessage" class="error-color" (click)="onCloseErrorMessage()">{{ errorMessage }}</h3>
 <div *ngIf="isProcessing">
   <h3 class="center">Carregando...</h3>
 </div>
 <h3 class="center" *ngIf="postagens && postagens.length == 0">*Não há Postagens</h3>
+<div class="container" *ngIf="isAdmin()">
+  <button mat-raised-button color="primary" type="button" (click)="onNovaPostagem()">Novo</button>
+  <br>
+</div>
 
 <mat-card class="center" *ngFor="let postagem of postagens">
   <mat-card-content>    
@@ -34,9 +38,6 @@
   </mat-card-content>
 </mat-card>
 <br>
-<div class="container" *ngIf="isAdmin()">
-  <button mat-raised-button color="primary" type="button" (click)="onNovaPostagem()">Novo</button>
-</div>
 <br>
 <br>
 <br>

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatSelectModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatCardModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HomeComponent } from './components/home/home.component';
 import { SobreComponent } from './components/sobre/sobre.component';
@@ -50,7 +50,7 @@ const appRouter = [
   { path:'reset-password/:email/:codigo', component: RedefinirSenhaComponent },  
   { path:'entrar', component: LoginComponent },
   { path:'quiz', component: QuizComponent },
-  { path:'redacoes', component: PostagensComponent },
+  { path:'postagens/:categoria', component: PostagensComponent },
   { path:'postagem/editar/:id', component: EditarPostagemComponent, canActivate: [AdminAuthGuardService] },  
   { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
   { path:'upload-revisao', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
@@ -97,6 +97,7 @@ const appRouter = [
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
+    MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

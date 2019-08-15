@@ -28,17 +28,28 @@
     <mat-card-content>        
         <br>
         <form [formGroup]="postagemForm" novalidate (ngSubmit)="onSubmit()">
-          <input type="hidden" formControlName="id"/>
+          <input type="hidden" name="id" formControlName="id"/>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Título" minlength="5" maxlength="60" 
+            <mat-label>Categoria</mat-label>
+            <mat-select name="categoria" formControlName="categoria" required>
+              <mat-option value="">Selecione</mat-option>
+              <mat-option value="redacoes">Redações</mat-option>
+              <mat-option value="dicas">Dicas</mat-option>
+            </mat-select>
+            <mat-error *ngIf="postagemForm.controls['categoria'].invalid">*Campo inválido</mat-error>
+          </mat-form-field>      
+          <br>
+          <br>               
+          <mat-form-field>
+            <input matInput name="titulo" placeholder="Título" minlength="5" maxlength="60" 
               formControlName="titulo">
             <mat-error *ngIf="postagemForm.controls['titulo'].invalid">*Campo inválido</mat-error>
           </mat-form-field>
           <br>
           <br>
           <mat-form-field>
-            <textarea matInput placeholder="Texto" type="text" minlength="5" maxlength="1000"
+            <textarea matInput name="texto" placeholder="Texto" type="text" minlength="5" maxlength="1000"
               formControlName="texto" rows="4"></textarea>
             <mat-error *ngIf="postagemForm.controls['texto'].invalid">*Campo inválido</mat-error>
           </mat-form-field>
@@ -46,7 +57,7 @@
           <br>          
           <div *ngIf="postagem?.urlImagem" class="container">
             <br>
-            <img mat-card-image class="center" [src]="postagem.urlImagem">
+            <img mat-card-image class="center" name="urlImagem" [src]="postagem.urlImagem">
           </div>
           <div class="upload-btn-wrapper">
             <button class="btn" mat-raised-button type="button">Upload da imagem</button>
@@ -54,7 +65,7 @@
             <br>
             <br>
             <mat-form-field>
-               <input matInput type="text" formControlName="imagem" readonly/>
+               <input matInput type="text" name="image" formControlName="imagem" readonly/>
             </mat-form-field>
           </div>
           <br>
