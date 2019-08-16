@@ -7,6 +7,7 @@
       <a mat-list-item href="#" routerLink="home"               (click)="drawer.toggle()">Home</a>
       <hr>
       <a mat-list-item href="#" routerLink="postagens/redacoes" (click)="drawer.toggle()">Redações</a>
+      <a mat-list-item href="#" routerLink="postagens/dicas"    (click)="drawer.toggle()">Dicas</a>
       <a mat-list-item href="#" routerLink="cadastro"           *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Cadastre-se</a>
       <a mat-list-item href="#" routerLink="entrar"             *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Entrar</a>
 
@@ -39,6 +40,7 @@
       <div class="container-center" *ngIf="!(isHandset$ | async)">
         <a type="button" mat-button class="mat-button" href="#">Sobre</a>&nbsp;&nbsp;
         <a type="button" mat-button class="mat-button" href="#" routerLink="postagens/redacoes">Redações</a>&nbsp;&nbsp;
+        <a type="button" mat-button class="mat-button" href="#" routerLink="postagens/dicas">Dicas</a>&nbsp;&nbsp;
         
         <a *ngIf="!isAuthenticated()" type="button" mat-button class="mat-button" href="#" routerLink="cadastro">Cadastre-se</a>&nbsp;&nbsp;
         <a *ngIf="!isAuthenticated()" type="button" mat-button class="mat-button" href="#" routerLink="entrar">Entrar</a>&nbsp;&nbsp;
