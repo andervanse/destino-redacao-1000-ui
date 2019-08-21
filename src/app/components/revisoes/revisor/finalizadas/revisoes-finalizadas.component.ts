@@ -40,7 +40,7 @@ export class RevisoesFinalizadasComponent implements OnInit {
 
   uploadArquivoCorrecao(revisaoRef :Revisao) {
     this.revisaoSvc.atualizarRevisaoUploadCorrecao(revisaoRef);
-    this.router.navigate(['../upload-correcao/', revisaoRef.id]);
+    this.router.navigate(['../revisoes/upload-correcao/', revisaoRef.id]);
   }
 
   onConfirmarExclusao(revisao :Revisao) {

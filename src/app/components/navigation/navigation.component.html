@@ -6,17 +6,17 @@
     <mat-nav-list>
       <a mat-list-item href="#" routerLink="home"               (click)="drawer.toggle()">Home</a>
       <hr>
-      <a mat-list-item href="#" routerLink="postagens/redacoes" (click)="drawer.toggle()">Redações</a>
+      <a mat-list-item href="#" routerLink="postagens/propostas" (click)="drawer.toggle()">Propostas</a>
       <a mat-list-item href="#" routerLink="postagens/dicas"    (click)="drawer.toggle()">Dicas</a>
       <a mat-list-item href="#" routerLink="cadastro"           *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Cadastre-se</a>
       <a mat-list-item href="#" routerLink="entrar"             *ngIf="!isAuthenticated()" (click)="drawer.toggle()">Entrar</a>
 
-      <div *ngIf="isAdmin(); then revisoes else redacoes"></div>
-      <ng-template #revisoes>
-         <a mat-list-item href="#" routerLink="painel-revisor" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Revisões</a>       
+      <div *ngIf="isAdmin(); then revisor else assinante"></div>
+      <ng-template #revisor>
+         <a mat-list-item href="#" routerLink="revisoes/painel-revisor" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Revisões</a>       
       </ng-template>
-      <ng-template #redacoes>         
-         <a mat-list-item href="#" routerLink="revisoes-assinante" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Minhas Redações</a>       
+      <ng-template #assinante>         
+         <a mat-list-item href="#" routerLink="revisoes/assinante" *ngIf="isAuthenticated()"  (click)="drawer.toggle()">Minhas Redações</a>       
       </ng-template>
       
       <hr>
@@ -47,10 +47,10 @@
                 
         <div *ngIf="isAdmin(); then revisoes else redacoes"></div>
         <ng-template #revisoes>
-           <a type="button" mat-button class="mat-button" href="#" routerLink="painel-revisor">Revisões</a>&nbsp;&nbsp;
+           <a type="button" mat-button class="mat-button" href="#" routerLink="revisoes/painel-revisor">Revisões</a>&nbsp;&nbsp;
         </ng-template>
         <ng-template #redacoes>
-           <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="revisoes-assinante">Minhas redações</a>&nbsp;&nbsp;
+           <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" routerLink="revisoes/assinante">Minhas redações</a>&nbsp;&nbsp;
         </ng-template>
         
         <a type="button" mat-button class="mat-button" href="#" *ngIf="isAuthenticated()" (click)="logout()">Sair</a>

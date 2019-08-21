@@ -43,7 +43,7 @@ export class RevisoesPendentesComponent implements OnInit {
 
   uploadArquivoCorrecao(revisao :Revisao) {
     this.revisaoSvc.atualizarRevisaoUploadCorrecao(revisao);
-    this.router.navigate(['../upload-correcao/', revisao.id]);
+    this.router.navigate(['../revisoes/upload-correcao/', revisao.id]);
   }
 
   private deletarRevisao(revisao :Revisao) {

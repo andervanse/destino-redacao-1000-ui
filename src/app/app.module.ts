@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -27,41 +26,10 @@ import { RedefinirSenhaComponent } from './components/senha/redefinir-senha/rede
 import { EmailEnviadoComponent } from './components/cadastro/email-enviado/email-enviado.component';
 import { EmailRedefinirSenhaComponent } from './components/senha/email-redefinir-senha/email-redefinir-senha.component';
 import { RevisaoAssinanteService } from './services/revisao-assinante.service';
-import { RevisoesAssinanteComponent } from './components/revisoes/assinante/revisoes-assinante.component';
-import { UploadRevisaoComponent } from './components/revisoes/upload-revisao/upload-revisao.component';
-import { RevisoesNovasComponent } from './components/revisoes/revisor/novas/revisoes-novas.component';
-import { RevisoesPendentesComponent } from './components/revisoes/revisor/pendentes/revisoes-pendentes.component';
 import { DialogConfirmComponent } from './components/dialog/confirmation-dialog.component';
-import { PainelRevisorComponent } from './components/revisoes/revisor/painel-revisor/painel-revisor.component';
 import { RedacoesComponent } from './components/redacoes/redacoes.component';
-import { RevisoesFinalizadasComponent } from './components/revisoes/revisor/finalizadas/revisoes-finalizadas.component';
-import { PostagensComponent } from './components/postagens/postagens.component';
-import { EditarPostagemComponent } from './components/postagens/editar-postagem/editar-postagem.component';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
-
-
-const appRouter = [
-  { path:'', redirectTo: '/home', pathMatch: 'full' },
-  { path:'home', component: HomeComponent },
-  { path:'cadastro', component: CadastroComponent },
-  { path:'email-enviado', component: EmailEnviadoComponent },  
-  { path:'email-redefinir-senha', component: EmailRedefinirSenhaComponent },
-  { path:'confirmar-email/:email/:codigo', component: ConfirmaEmailComponent },
-  { path:'reset-password/:email/:codigo', component: RedefinirSenhaComponent },  
-  { path:'entrar', component: LoginComponent },
-  { path:'quiz', component: QuizComponent },
-  { path:'postagens/:categoria', component: PostagensComponent },
-  { path:'postagem/editar/:id', component: EditarPostagemComponent, canActivate: [AdminAuthGuardService] },  
-  { path:'revisoes-assinante', component: RevisoesAssinanteComponent, canActivate: [AuthGuardService] },
-  { path:'upload-revisao', component: UploadRevisaoComponent, canActivate: [AuthGuardService] },  
-  { path:'upload-correcao/:revisaoId', component: UploadRevisaoComponent, canActivate: [AdminAuthGuardService] },  
-  { path:'revisoes-novas', component: RevisoesNovasComponent, canActivate: [AdminAuthGuardService] },
-  { path:'revisoes-pendentes', component: RevisoesPendentesComponent, canActivate: [AdminAuthGuardService] },
-  { path:'revisoes-finalizadas', component: RevisoesFinalizadasComponent, canActivate: [AdminAuthGuardService] },
-  { path:'painel-revisor', component: PainelRevisorComponent, canActivate: [AdminAuthGuardService] },
-  { path:'contato', component: ContatoComponent },
-  { path:'sobre', component: SobreComponent }
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -73,21 +41,13 @@ const appRouter = [
     LoginComponent,
     CadastroComponent,
     FooterComponent,
-    RevisoesAssinanteComponent,
     QuizComponent,
     EmailEnviadoComponent,
     ConfirmaEmailComponent,
     RedefinirSenhaComponent,
     EmailRedefinirSenhaComponent,
-    UploadRevisaoComponent,
-    RevisoesNovasComponent,
     DialogConfirmComponent,
-    RevisoesPendentesComponent,
-    PainelRevisorComponent,
-    RedacoesComponent,
-    RevisoesFinalizadasComponent,
-    PostagensComponent,
-    EditarPostagemComponent
+    RedacoesComponent
   ],
   imports: [
     BrowserModule,
@@ -105,8 +65,8 @@ const appRouter = [
     MatListModule,
     MatCardModule,
     MatInputModule,
-    MatDialogModule,    
-    RouterModule.forRoot(appRouter, { useHash: true })
+    MatDialogModule,  
+    AppRoutingModule    
   ],
   entryComponents: [
     DialogConfirmComponent

@@ -2,12 +2,9 @@
   <mat-card id="banner">
     <mat-card-content>
       <img mat-card-image src="../../../assets/images/novo_logo.png" alt="logo">
-      <h1>Redações</h1>
     </mat-card-content>
   </mat-card>
 </section>
-<br>
-<br>
 <br>
 <br>
 
@@ -15,7 +12,7 @@
 <div *ngIf="isProcessing">
   <h3 class="center">Carregando...</h3>
 </div>
-<h3 class="center" *ngIf="postagens && postagens.length == 0">*Não há Postagens</h3>
+<h3 class="center" *ngIf="postagens && postagens.length == 0">*Não há registros</h3>
 <div class="container" *ngIf="isAdmin()">
   <button mat-raised-button color="primary" type="button" (click)="onNovaPostagem()">Novo</button>
   <br>

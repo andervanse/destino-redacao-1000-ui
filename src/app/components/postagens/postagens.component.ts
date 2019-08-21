@@ -49,11 +49,11 @@ export class PostagensComponent implements OnInit {
   }
 
   onNovaPostagem() {
-    this.router.navigate(['postagem/editar', 0]);
+    this.router.navigate(['postagens/editar', 0]);
   }
 
   onEditarPostagem(postagem :Postagem) {
-    this.router.navigate(['postagem/editar', postagem.id]);
+    this.router.navigate(['postagens/editar', postagem.id]);
   }
 
   onConfirmarExclusaoPostagem(postagem :Postagem) {

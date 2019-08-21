@@ -58,7 +58,7 @@ export class RevisoesNovasComponent implements OnInit {
         
         this.revisaoSvc.atualizarRevisor(atualizaRevisao).subscribe(
           (resp) => {
-            this.router.navigate(['../painel-revisor']);
+            this.router.navigate(['../revisoes/painel-revisor']);
           },
           (errorResponse) => { console.error(errorResponse.error); }
         );
