@@ -21,7 +21,7 @@
 <mat-card class="center" *ngFor="let postagem of postagens">
   <mat-card-content>    
     <h2>{{ postagem.titulo }}</h2>
-    <p [innerHTML]="postagem.texto" >      
+    <p [innerHTML]="sanitizeHTML(postagem.texto)" >      
     </p>
     <div class="container">
       <br>

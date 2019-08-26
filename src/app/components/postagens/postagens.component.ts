@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DialogConfirmComponent } from '../dialog/confirmation-dialog.component';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-postagens',
@@ -18,6 +19,7 @@ export class PostagensComponent implements OnInit {
   errorMessage: string = null;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +48,10 @@ export class PostagensComponent implements OnInit {
 
   isAdmin():boolean {
     return this.authSvc.isAdmin();
+  }
+
+  sanitizeHTML(content :string):SafeHtml {
+     return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
   onNovaPostagem() {
