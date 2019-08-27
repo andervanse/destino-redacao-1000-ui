@@ -21,8 +21,8 @@
 <mat-card class="center" *ngFor="let postagem of postagens">
   <mat-card-content>    
     <h2>{{ postagem.titulo }}</h2>
-    <p [innerHTML]="sanitizeHTML(postagem.texto)" >      
-    </p>
+    <div [innerHTML]="sanitizeHTML(postagem.texto)">      
+    </div>
     <div class="container">
       <br>
       <img *ngIf="postagem.urlImagem" mat-card-image class="center" [src]="postagem.urlImagem">
